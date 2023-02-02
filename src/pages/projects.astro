@@ -1,8 +1,59 @@
 ---
+import ProjectItem from '../components/ProjectItem.astro'
 import Layout from '../layouts/Layout.astro'
+
+const projects = [
+  {
+    title: 'Simba.js',
+    description: 'TypeScript framework for backend development.',
+    image:
+      'https://firebasestorage.googleapis.com/v0/b/cc-planinfoextractor.appspot.com/o/simba-pink.png?alt=media',
+    url: 'https://github.com/AnthonyLzq/simba.js'
+  },
+  {
+    title: 'TypeScript Project Generator',
+    description: 'Minimalist TypeScript project generator for Node.js.',
+    image: 'https://picsum.photos/300/200',
+    url: 'https://github.com/AnthonyLzq/typescript-project-generator'
+  },
+  {
+    title: 'node-webcam',
+    description: 'Node.js Cross-platform webcam module.',
+    image: 'https://picsum.photos/300/200',
+    url: 'https://github.com/AnthonyLzq/node-webcam'
+  },
+  {
+    title: 'ACECOM',
+    description: "ACECOM's web page.",
+    image: 'https://acecom.dev/images/Marck5.png',
+    url: 'https://www.acecom.dev'
+  },
+  {
+    title: 'Shopping Cart',
+    description:
+      'Minimalist shopping cart with React, TypeScript, Material-UI and Vite.',
+    image: 'https://picsum.photos/300/200',
+    url: 'https://scr.anthonylzq.dev/'
+  }
+]
 ---
 
 <Layout title='Projects'>
-  <h1>Projects</h1>
-  <p>Here are some of my projects.</p>
+  <main>
+    <h1>Projects</h1>
+    <section>{projects.map(project => <ProjectItem {...project} />)}</section>
+  </main>
 </Layout>
+
+<style>
+  main {
+    padding: 1rem 2rem;
+  }
+
+  section {
+    display: grid;
+    gap: 2rem;
+    grid-template-rows: 24rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+</style>
