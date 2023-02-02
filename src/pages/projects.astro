@@ -160,17 +160,11 @@ const projects: ProjectItemProps[] = [
 ---
 
 <Layout title='Projects | AnthonyLzq'>
-  <main>
-    <h1>Projects</h1>
-    <section>{projects.map(project => <ProjectItem {...project} />)}</section>
-  </main>
+  <h1>Projects</h1>
+  <section>{projects.map(project => <ProjectItem {...project} />)}</section>
 </Layout>
 
 <style>
-  main {
-    padding: 1rem 2rem;
-  }
-
   section {
     display: grid;
     gap: 2rem;
