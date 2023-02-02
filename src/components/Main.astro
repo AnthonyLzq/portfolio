@@ -1,0 +1,122 @@
+---
+---
+
+<main>
+  <article id='profile'>
+    <section id='profile__description'>
+      <h1>Full Stack Developer</h1>
+      <p>
+        I'm a full stack developer with a passion for building great products. I
+        have experience building web applications with TypeScript, React and
+        Node.js.
+      </p>
+      <ul>
+        <li>LinkedIn</li>
+        <li>GitHub</li>
+        <li>Twitter</li>
+      </ul>
+    </section>
+    <section id='profile__photo'>
+      <img
+        src='https://avatars.githubusercontent.com/u/43073718?s=400&u=aec2fb80a012b0d5ec19c1368ccb796638860cad&v=4'
+        alt='profile'
+      />
+    </section>
+  </article>
+</main>
+
+<style>
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 66px);
+  }
+
+  article#profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 75%;
+    column-gap: 4rem;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  section#profile__description {
+    row-gap: 1.5rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0 1rem;
+  }
+
+  img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 768px) {
+    article {
+      flex-direction: column;
+    }
+
+    section {
+      align-items: center;
+    }
+
+    section#description {
+      row-gap: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    ul {
+      flex-direction: column;
+    }
+
+    li {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+</style>
