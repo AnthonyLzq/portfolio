@@ -28,14 +28,14 @@ const projects: ProjectItemProps[] = [
     description: 'Minimalist TypeScript project generator for Node.js.',
     image: 'https://picsum.photos/300/200',
     url: 'https://github.com/AnthonyLzq/typescript-project-generator',
-    tech: [tech.typescript, tech.node]
+    tech: [tech.typescript, tech.javascript, tech.node]
   },
   {
     title: 'node-webcam',
     description: 'Node.js Cross-platform webcam module.',
     image: 'https://picsum.photos/300/200',
     url: 'https://github.com/AnthonyLzq/node-webcam',
-    tech: [tech.typescript, tech.node]
+    tech: [tech.typescript, tech.javascript, tech.node]
   },
   {
     title: 'ACECOM',
@@ -45,6 +45,7 @@ const projects: ProjectItemProps[] = [
     tech: [
       tech.typescript,
       tech.remix,
+      tech.react,
       tech.material,
       tech.supabase,
       tech.prisma
@@ -57,7 +58,7 @@ const projects: ProjectItemProps[] = [
       'Minimalist shopping cart with React, TypeScript, Material-UI and Vite.',
     image: 'https://picsum.photos/300/200',
     url: 'https://scr.anthonylzq.dev/',
-    tech: [tech.typescript, tech.react]
+    tech: [tech.typescript, tech.react, tech.material]
   }
 ]
 ---
@@ -72,5 +73,11 @@ const projects: ProjectItemProps[] = [
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    section {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
   }
 </style>
