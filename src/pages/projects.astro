@@ -3,6 +3,7 @@ import ProjectItem, {
   Props as ProjectItemProps
 } from '../components/ProjectItem.astro'
 import Layout from '../layouts/Layout.astro'
+import { tech } from '../utils'
 
 const projects: ProjectItemProps[] = [
   {
@@ -12,52 +13,14 @@ const projects: ProjectItemProps[] = [
       'https://firebasestorage.googleapis.com/v0/b/cc-planinfoextractor.appspot.com/o/simba-pink.png?alt=media',
     url: 'https://github.com/AnthonyLzq/simba.js',
     tech: [
-      {
-        name: 'TypeScript',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/typescript-original.svg',
-        url: 'https://www.typescriptlang.org'
-      },
-      {
-        name: 'JavsScript',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/javascript-original.svg',
-        url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'
-      },
-      {
-        name: 'Node.js',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/nodejs-original-wordmark.svg',
-        url: 'https://nodejs.org'
-      },
-      {
-        name: 'Express',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/express-original-wordmark.svg',
-        url: 'https://expressjs.com'
-      },
-      {
-        name: 'Fastify',
-        image: 'https://avatars.githubusercontent.com/u/24939410',
-        url: 'https://fastify.io'
-      },
-      {
-        name: 'GraphQL',
-        image: 'https://profilinator.rishav.dev/skills-assets/graphql.png',
-        url: 'https://graphql.org'
-      },
-      {
-        name: 'MongoDB',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/mongodb-original-wordmark.svg',
-        url: 'https://www.mongodb.com'
-      },
-      {
-        name: 'PostgreSQL',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/postgresql-original-wordmark.svg',
-        url: 'https://www.postgresql.org'
-      }
+      tech.typescript,
+      tech.javascript,
+      tech.node,
+      tech.express,
+      tech.fastify,
+      tech.graphql,
+      tech.mongo,
+      tech.postgres
     ]
   },
   {
@@ -65,40 +28,14 @@ const projects: ProjectItemProps[] = [
     description: 'Minimalist TypeScript project generator for Node.js.',
     image: 'https://picsum.photos/300/200',
     url: 'https://github.com/AnthonyLzq/typescript-project-generator',
-    tech: [
-      {
-        name: 'TypeScript',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/typescript-original.svg',
-        url: 'https://www.typescriptlang.org'
-      },
-      {
-        name: 'Node.js',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/nodejs-original-wordmark.svg',
-        url: 'https://nodejs.org'
-      }
-    ]
+    tech: [tech.typescript, tech.node]
   },
   {
     title: 'node-webcam',
     description: 'Node.js Cross-platform webcam module.',
     image: 'https://picsum.photos/300/200',
     url: 'https://github.com/AnthonyLzq/node-webcam',
-    tech: [
-      {
-        name: 'TypeScript',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/typescript-original.svg',
-        url: 'https://www.typescriptlang.org'
-      },
-      {
-        name: 'Node.js',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/nodejs-original-wordmark.svg',
-        url: 'https://nodejs.org'
-      }
-    ]
+    tech: [tech.typescript, tech.node]
   },
   {
     title: 'ACECOM',
@@ -106,32 +43,11 @@ const projects: ProjectItemProps[] = [
     image: 'https://acecom.dev/images/Marck5.png',
     url: 'https://www.acecom.dev',
     tech: [
-      {
-        name: 'TypeScript',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/typescript-original.svg',
-        url: 'https://www.typescriptlang.org'
-      },
-      {
-        name: 'Remix',
-        image: 'https://avatars.githubusercontent.com/u/64235328?s=200&v=4',
-        url: 'https://remix.run'
-      },
-      {
-        name: 'MaterialUI',
-        image: 'https://profilinator.rishav.dev/skills-assets/mui.png',
-        url: 'https://material-ui.com'
-      },
-      {
-        name: 'Supabase',
-        image: 'https://avatars.githubusercontent.com/u/54469796',
-        url: 'https://supabase.io'
-      },
-      {
-        name: 'Prisma',
-        image: 'https://profilinator.rishav.dev/skills-assets/prisma.png',
-        url: 'https://www.prisma.io'
-      }
+      tech.typescript,
+      tech.remix,
+      tech.material,
+      tech.supabase,
+      tech.prisma
     ],
     objectFit: 'contain'
   },
@@ -141,20 +57,7 @@ const projects: ProjectItemProps[] = [
       'Minimalist shopping cart with React, TypeScript, Material-UI and Vite.',
     image: 'https://picsum.photos/300/200',
     url: 'https://scr.anthonylzq.dev/',
-    tech: [
-      {
-        name: 'TypeScript',
-        image:
-          'https://profilinator.rishav.dev/skills-assets/typescript-original.svg',
-        url: 'https://www.typescriptlang.org'
-      },
-      {
-        name: 'React',
-        image:
-          'https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg',
-        url: 'https://reactjs.org'
-      }
-    ]
+    tech: [tech.typescript, tech.react]
   }
 ]
 ---

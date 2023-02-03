@@ -1,16 +1,13 @@
 ---
 import Icon from './Icon.astro'
+import type { Tech } from '../utils'
 
 export interface Props {
   title: string
   description: string
   image: string
   url: string
-  tech: {
-    name: string
-    image: string
-    url: string
-  }[]
+  tech: Tech[]
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down'
 }
 

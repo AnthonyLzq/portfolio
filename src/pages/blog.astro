@@ -1,11 +1,32 @@
 ---
+import BlogEntry from '../components/BlogEntry.astro'
 import Layout from '../layouts/Layout.astro'
+
+const posts = await Astro.glob('./blog/*.md')
 ---
 
 <Layout title='Blog | AnthonyLzq'>
   <h1>Blog</h1>
   <p>Here's a list of blog posts:</p>
-  <ul>
-    <li><a href='/blog/post-1'>First Post</a></li>
-  </ul>
+  <section>
+    {
+      posts.map(post => (
+        <BlogEntry
+          title={post.frontmatter.title}
+          pubDate={post.frontmatter.pubDate}
+          description={post.frontmatter.description}
+          minutesRead={post.frontmatter.minutesRead}
+          url={post.url}
+        />
+      ))
+    }
+  </section>
 </Layout>
+
+<style>
+  section {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  }
+</style>
