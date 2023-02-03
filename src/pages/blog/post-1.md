@@ -4,8 +4,8 @@ pubDate: 2021-12-12
 description: 'A brief explanation of how to create Global Variables in TS with Node.js'
 author: 'AnthonyLzq'
 image:
-    url: 'https://cdn-images-1.medium.com/max/800/1*hy4Je0qslH_8SauYd5lzmw.jpeg' 
-    alt: 'A girl coding.'
+  url: 'https://cdn-images-1.medium.com/max/800/1*hy4Je0qslH_8SauYd5lzmw.jpeg'
+  alt: 'A girl coding.'
 layout: ../../layouts/PostLayout.astro
 tags: ["typescript", "node.js"]
 ---
