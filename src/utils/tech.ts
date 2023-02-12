@@ -76,6 +76,26 @@ const tech: Record<string, Tech> = {
     image:
       'https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg',
     url: 'https://reactjs.org'
+  },
+  'chart.js': {
+    name: 'Chart.js',
+    image: 'https://profilinator.rishav.dev/skills-assets/logo-title.svg',
+    url: 'https://www.chartjs.org'
+  },
+  'mqtt.js': {
+    name: 'MQTT.js',
+    image: 'https://avatars.githubusercontent.com/u/10424911?s=200&v=4',
+    url: 'https://github.com/mqttjs/MQTT.js'
+  },
+  tensorflow: {
+    name: 'TensorFlow',
+    image: 'https://profilinator.rishav.dev/skills-assets/tensorflow-icon.svg',
+    url: 'https://www.tensorflow.org'
+  },
+  raspberry: {
+    name: 'Raspberry Pi',
+    image: 'https://profilinator.rishav.dev/skills-assets/raspberrypi.png',
+    url: 'https://www.raspberrypi.org'
   }
 }
 

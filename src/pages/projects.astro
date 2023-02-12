@@ -57,8 +57,26 @@ const projects: ProjectItemProps[] = [
     description:
       'Minimalist shopping cart with React, TypeScript, Material-UI and Vite.',
     image: 'https://picsum.photos/300/200',
-    url: 'https://scr.anthonylzq.dev/',
+    url: 'https://scr.anthonylzq.dev',
     tech: [tech.typescript, tech.react, tech.material]
+  },
+  {
+    title: 'Thesis Project I',
+    description:
+      'Real Time Face Recognition and Communication using IoT protocols',
+    image: 'https://picsum.photos/300/200',
+    url: 'https://thesis1.anthonylzq.dev/',
+    tech: [
+      tech.typescript,
+      tech.node,
+      tech.remix,
+      tech.react,
+      tech.material,
+      tech['chart.js'],
+      tech['mqtt.js'],
+      tech.tensorflow,
+      tech.raspberry
+    ]
   }
 ]
 ---
@@ -75,9 +93,27 @@ const projects: ProjectItemProps[] = [
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     section {
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    section {
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    }
+  }
+
+  @media (max-width: 680px) {
+    section {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    section {
+      grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
     }
   }
 </style>
