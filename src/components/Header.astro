@@ -13,6 +13,31 @@
       <li><a href='/contact'>Contact</a></li>
     </ul>
   </navbar>
+  <script>
+    const css = `
+#checkbox_toggle:checked ~ ul {
+  animation: slideRight 0.25s ease forwards;
+}
+
+#checkbox_toggle:not(:checked) ~ ul {
+  animation: slideLeft 1s ease forwards;
+}
+`
+    const head = document.head || document.getElementsByTagName('head')[0]
+    const style = document.createElement('style')
+    let clicked = false
+
+    document
+      .querySelector('#checkbox_toggle')
+      ?.addEventListener('click', () => {
+        if (!clicked) {
+          style.appendChild(document.createTextNode(css))
+          head.appendChild(style)
+        }
+
+        clicked = !clicked
+      })
+  </script>
 </header>
 
 <style>
@@ -90,14 +115,6 @@
 
     #checkbox_toggle ~ ul li {
       width: 100%;
-    }
-
-    #checkbox_toggle:checked ~ ul {
-      animation: slideRight 0.3s ease forwards;
-    }
-
-    #checkbox_toggle:not(:checked) ~ ul {
-      animation: slideLeft 1s ease forwards;
     }
 
     #checkbox_toggle:checked ~ ul li::after {
