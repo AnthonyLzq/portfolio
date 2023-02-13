@@ -5,7 +5,7 @@
   <img src='https://acecom.dev/favicon.ico' alt='avatar' />
   <navbar>
     <input type='checkbox' id='checkbox_toggle' />
-    <label for='checkbox_toggle' class='hamburger'>&#9776;</label>
+    <label for='checkbox_toggle'>&#9776;</label>
     <ul>
       <li><a href='/'>About me</a></li>
       <li><a href='/projects'>Projects</a></li>
@@ -75,17 +75,84 @@
     }
 
     navbar ul {
-      display: none;
-    }
-
-    #checkbox_toggle:checked ~ ul {
       position: absolute;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      right: 5%;
+      right: -100%;
       top: 66px;
       align-items: flex-end;
+      background-color: #fff;
+      padding: 0.5rem 0.5rem 0.75rem;
+      border-radius: 4px;
+      text-align: end;
+    }
+
+    #checkbox_toggle ~ ul li {
+      width: 100%;
+    }
+
+    #checkbox_toggle:checked ~ ul {
+      animation: slideRight 0.3s ease forwards;
+    }
+
+    #checkbox_toggle:not(:checked) ~ ul {
+      animation: slideLeft 1s ease forwards;
+    }
+
+    #checkbox_toggle:checked ~ ul li::after {
+      content: ' ';
+      display: block;
+      width: 10%;
+      height: 1px;
+      background-color: #000;
+      transition: width 0.3s;
+      position: absolute;
+      right: 10px;
+      margin-top: 2px;
+    }
+
+    #checkbox_toggle:checked ~ ul li:hover::after {
+      animation: bigger 0.2s ease forwards;
+    }
+
+    @keyframes slideRight {
+      0% {
+        opacity: 0;
+        right: -100%;
+      }
+      50% {
+        opacity: 0.5;
+        right: -50%;
+      }
+      100% {
+        opacity: 1;
+        right: 5%;
+      }
+    }
+
+    @keyframes slideLeft {
+      0% {
+        opacity: 1;
+        right: 5%;
+      }
+      50% {
+        opacity: 0.5;
+        right: -40%;
+      }
+      100% {
+        opacity: 0;
+        right: -100%;
+      }
+    }
+
+    @keyframes bigger {
+      0% {
+        height: 1px;
+      }
+      100% {
+        height: 4px;
+      }
     }
   }
 </style>
