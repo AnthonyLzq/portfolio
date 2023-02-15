@@ -6,7 +6,7 @@
   <navbar>
     <input type='checkbox' id='checkbox_toggle' />
     <label for='checkbox_toggle'>&#9776;</label>
-    <ul>
+    <ul class='hidden'>
       <li><a href='/'>About me</a></li>
       <li><a href='/projects'>Projects</a></li>
       <li><a href='/blog'>Blog</a></li>
@@ -15,28 +15,28 @@
   </navbar>
   <script>
     const css = `
-#checkbox_toggle:checked ~ ul {
-  animation: slideRight 0.25s ease forwards;
+#checkbox_toggle:not(:checked) ~ ul {
+  animation: slideRight 0.25s linear forwards;
 }
 
-#checkbox_toggle:not(:checked) ~ ul {
-  animation: slideLeft 1s ease forwards;
+#checkbox_toggle:checked ~ ul {
+  animation: slideLeft 0.25s linear forwards;
 }
 `
     const head = document.head || document.getElementsByTagName('head')[0]
     const style = document.createElement('style')
     let clicked = false
 
-    document
-      .querySelector('#checkbox_toggle')
-      ?.addEventListener('click', () => {
-        if (!clicked) {
-          style.appendChild(document.createTextNode(css))
-          head.appendChild(style)
-        }
+    const element = document.querySelector('#checkbox_toggle')
 
+    element?.addEventListener('click', () => {
+      if (!clicked) {
+        document.querySelector('ul')?.classList.remove('hidden')
+        style.appendChild(document.createTextNode(css))
+        head.appendChild(style)
         clicked = !clicked
-      })
+      }
+    })
   </script>
 </header>
 
@@ -93,6 +93,10 @@
   }
 
   @media (max-width: 768px) {
+    .hidden {
+      visibility: hidden;
+    }
+
     navbar label {
       display: block;
       font-size: 2rem;
@@ -100,17 +104,18 @@
     }
 
     navbar ul {
-      position: absolute;
+      position: fixed;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      right: -100%;
-      top: 66px;
+      right: 36px;
+      top: 52px;
       align-items: flex-end;
       background-color: #fff;
       padding: 0.5rem 0.5rem 0.75rem;
       border-radius: 4px;
       text-align: end;
+      min-width: 86px;
     }
 
     #checkbox_toggle ~ ul li {
@@ -130,36 +135,28 @@
     }
 
     #checkbox_toggle:checked ~ ul li:hover::after {
-      animation: bigger 0.2s ease forwards;
+      animation: bigger 0.2s linear forwards;
     }
 
     @keyframes slideRight {
       0% {
-        opacity: 0;
-        right: -100%;
-      }
-      50% {
-        opacity: 0.5;
-        right: -50%;
+        opacity: 1;
+        transform: translateX(0%);
       }
       100% {
-        opacity: 1;
-        right: 5%;
+        opacity: 0;
+        transform: translateX(100%);
       }
     }
 
     @keyframes slideLeft {
       0% {
-        opacity: 1;
-        right: 5%;
-      }
-      50% {
-        opacity: 0.5;
-        right: -40%;
+        opacity: 0;
+        transform: translateX(100%);
       }
       100% {
-        opacity: 0;
-        right: -100%;
+        opacity: 1;
+        transform: translateX(0%);
       }
     }
 
