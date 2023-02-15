@@ -4,4 +4,151 @@ import Layout from '../layouts/Layout.astro'
 
 <Layout title='Contact me | AnthonyLzq'>
   <h1>Contact me</h1>
+  <div class='container'>
+    <div class='body'>
+      <section class='dots'>
+        <div class='left-side'>
+          <div class='first-dot'></div>
+          <div class='second-dot'></div>
+          <div class='third-dot'></div>
+        </div>
+        <div class='right-site'></div>
+      </section>
+      <form action='' method='post'>
+        <div class='form-name'>
+          <label for='name' style='margin-bottom: 5px;'>Name:</label>
+          <input
+            type='text'
+            id='name'
+            name='name'
+            required
+            class='input-name'
+          />
+        </div>
+        <div class='form-email'>
+          <label for='email' style='margin-bottom: 5px;'>Email:</label>
+          <input
+            type='email'
+            id='email'
+            name='email'
+            required
+            class='input-email'
+          />
+        </div>
+        <div class='form-message'>
+          <label for='message' style='margin-bottom: 5px;'>Message:</label>
+          <textarea id='message' name='message' required class='input-message'
+          ></textarea>
+        </div>
+        <button
+          type='submit'
+          style='padding: 10px 20px; background-color: #34c749; color: #fff; border: none; border-radius: 5px; cursor: pointer;'
+          >Send</button
+        >
+      </form>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+  }
+
+  .container {
+    --left-width: 12%;
+    --right-width: calc(100% - var(--left-width));
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 66px - 80.88px - 2rem);
+    overflow: hidden;
+    align-items: center;
+  }
+
+  .body {
+    max-width: 400px;
+    min-height: 336px;
+    flex: 1;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    margin-bottom: 32px;
+  }
+
+  .dots {
+    width: 100%;
+  }
+
+  .first-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fc625d;
+  }
+
+  .second-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fdbc40;
+  }
+
+  .third-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #34c749;
+  }
+
+  .left-side {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: var(--left-width);
+  }
+
+  .right-side {
+    width: var(--right-width);
+  }
+
+  .form-name {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .input-name {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .form-email {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .input-email {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .form-message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .input-message {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+</style>
