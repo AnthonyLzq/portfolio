@@ -14,7 +14,7 @@ import Layout from '../layouts/Layout.astro'
         </div>
         <div class='right-site'></div>
       </section>
-      <form action='' method='post'>
+      <form>
         <div class='form-name'>
           <label for='name' style='margin-bottom: 5px;'>Name:</label>
           <input
@@ -43,8 +43,9 @@ import Layout from '../layouts/Layout.astro'
         <button
           type='submit'
           style='padding: 10px 20px; background-color: #34c749; color: #fff; border: none; border-radius: 5px; cursor: pointer;'
-          >Send</button
         >
+          Send
+        </button>
       </form>
     </div>
   </div>
@@ -75,7 +76,7 @@ import Layout from '../layouts/Layout.astro'
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
-    margin-bottom: 32px;
+    margin-bottom: 60px;
   }
 
   .dots {
@@ -152,3 +153,27 @@ import Layout from '../layouts/Layout.astro'
     resize: vertical;
   }
 </style>
+
+<script>
+  let token = ''
+
+  fetch(import.meta.env.PUBLIC_SERVER_URL, {
+    headers: {
+      origin: import.meta.env.PUBLIC_ORIGIN
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      token = data.token
+      console.log(token)
+    })
+
+  const onClick = async (e: Event) => {
+    e.preventDefault()
+    import('../utils/sendMail').then(({ sendMail }) => sendMail(e, token))
+  }
+
+  document
+    .querySelector('button[type="submit"]')
+    ?.addEventListener('click', onClick)
+</script>

@@ -13,31 +13,6 @@
       <li><a href='/contact'>Contact</a></li>
     </ul>
   </navbar>
-  <script>
-    const css = `
-#checkbox_toggle:not(:checked) ~ ul {
-  animation: slideRight 0.25s linear forwards;
-}
-
-#checkbox_toggle:checked ~ ul {
-  animation: slideLeft 0.25s linear forwards;
-}
-`
-    const head = document.head || document.getElementsByTagName('head')[0]
-    const style = document.createElement('style')
-    let clicked = false
-
-    const element = document.querySelector('#checkbox_toggle')
-
-    element?.addEventListener('click', () => {
-      if (!clicked) {
-        document.querySelector('ul')?.classList.remove('hidden')
-        style.appendChild(document.createTextNode(css))
-        head.appendChild(style)
-        clicked = !clicked
-      }
-    })
-  </script>
 </header>
 
 <style>
@@ -170,3 +145,29 @@
     }
   }
 </style>
+
+<script>
+  const css = `
+#checkbox_toggle:not(:checked) ~ ul {
+animation: slideRight 0.25s linear forwards;
+}
+
+#checkbox_toggle:checked ~ ul {
+animation: slideLeft 0.25s linear forwards;
+}
+`
+  const head = document.head || document.getElementsByTagName('head')[0]
+  const style = document.createElement('style')
+  let clicked = false
+
+  const element = document.querySelector('#checkbox_toggle')
+
+  element?.addEventListener('click', () => {
+    if (!clicked) {
+      document.querySelector('ul')?.classList.remove('hidden')
+      style.appendChild(document.createTextNode(css))
+      head.appendChild(style)
+      clicked = !clicked
+    }
+  })
+</script>
