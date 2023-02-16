@@ -6,7 +6,7 @@ const sendMail = (e: Event, token: string) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Origin: 'http://localhost:3000',
+      origin: import.meta.env.PUBLIC_ORIGIN,
       'Api-Key': token
     },
     body: JSON.stringify({
