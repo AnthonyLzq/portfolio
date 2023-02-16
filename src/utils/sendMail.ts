@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/promise-function-async */
-const sendMail = (e: Event, token: string) => {
+const sendMail = (e: Event, token: string, randomUUID: string) => {
   e.preventDefault()
 
-  fetch(import.meta.env.PUBLIC_SERVER_URL, {
+  fetch(`${import.meta.env.PUBLIC_SERVER_URL as string}/${randomUUID}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

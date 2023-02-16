@@ -156,8 +156,9 @@ import Layout from '../layouts/Layout.astro'
 
 <script>
   let token = ''
+  const randomUUID = crypto.randomUUID()
 
-  fetch(import.meta.env.PUBLIC_SERVER_URL, {
+  fetch(`${import.meta.env.PUBLIC_SERVER_URL}/${randomUUID}`, {
     headers: {
       origin: import.meta.env.PUBLIC_ORIGIN
     }
@@ -171,7 +172,9 @@ import Layout from '../layouts/Layout.astro'
 
   const onClick = async (e: Event) => {
     e.preventDefault()
-    import('../utils/sendMail').then(({ sendMail }) => sendMail(e, token))
+    import('../utils/sendMail').then(({ sendMail }) =>
+      sendMail(e, token, randomUUID)
+    )
   }
 
   document
