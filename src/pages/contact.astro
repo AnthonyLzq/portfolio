@@ -1,5 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { Recaptcha } from '../components/Recaptcha'
+
+let validCaptcha = false
+
+const v2Callback = (token: string | false | Error) => {
+  validCaptcha = true
+  console.log(token)
+}
 ---
 
 <Layout title='Contact me | AnthonyLzq'>
@@ -40,6 +48,13 @@ import Layout from '../layouts/Layout.astro'
           <textarea id='message' name='message' required class='input-message'
           ></textarea>
         </div>
+        <Recaptcha
+          isMobile={false}
+          style={{
+            height: 300
+          }}
+          v2Callback={v2Callback}
+        />
         <button
           type='submit'
           style='padding: 10px 20px; background-color: #34c749; color: #fff; border: none; border-radius: 5px; cursor: pointer;'
@@ -157,6 +172,10 @@ import Layout from '../layouts/Layout.astro'
 <script>
   let token = ''
   const randomUUID = crypto.randomUUID()
+  // console.log({
+  //   width: window.innerWidth,
+  //   validCaptcha
+  // })
 
   fetch(`${import.meta.env.PUBLIC_SERVER_URL}/${randomUUID}`, {
     headers: {
@@ -166,7 +185,6 @@ import Layout from '../layouts/Layout.astro'
     .then(res => res.json())
     .then(data => {
       token = data.token
-      console.log(token)
     })
     .catch(err => console.log(err))
 
@@ -180,4 +198,8 @@ import Layout from '../layouts/Layout.astro'
   document
     .querySelector('button[type="submit"]')
     ?.addEventListener('click', onClick)
+
+  window.addEventListener('resize', () => {
+    console.log('resize')
+  })
 </script>
