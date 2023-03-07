@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import rrx from 'react-recaptcha-x'
+import {
+  ReCaptchaProvider,
+  ReCaptchaV2,
+  EReCaptchaV2Theme,
+  EReCaptchaV2Size
+} from 'react-recaptcha-x'
 import { useToken } from '../hooks'
 import { useIsMobile } from '../hooks/useIsMobile'
 
 import '../styles/recaptcha.css'
-
-const { ReCaptchaProvider, ReCaptchaV2, EReCaptchaV2Theme, EReCaptchaV2Size } =
-  rrx
 
 const Recaptcha = () => {
   const [captchaToken, setCaptchaToken] = useState<string>('')
