@@ -7,6 +7,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.50.0
   '@typescript-eslint/parser': ^5.50.0
   astro: ^2.0.5
+  astro-seo: ^0.7.1
   eslint: ^8.33.0
   eslint-config-prettier: ^8.6.0
   eslint-config-standard-with-typescript: ^34.0.0
@@ -29,6 +30,7 @@ dependencies:
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   astro: 2.0.5
+  astro-seo: 0.7.1
   mdast-util-to-string: 3.1.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1098,6 +1100,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /astro-seo/0.7.1:
+    resolution: {integrity: sha512-8Yo1nQrl2iB5zj+VUAHrvGIck8bZ4WAmXQgJOeF9FuAZGQD5qK6DtSZaRbpBXsFfZYHA6tE8pjs3btHhLbC1zQ==}
+    dev: false
 
   /astro/2.0.5:
     resolution: {integrity: sha512-ZuTbCOZLOnVOQ/np+82H3apL4TQ9jRUtIMfnAAUr4BG8NthwoY718avm5lfiI25bDqs7QA012Zh6l1h3RpJwtw==}
