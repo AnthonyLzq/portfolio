@@ -1,0 +1,14 @@
+p {
+  margin-top: 0.75rem !important;
+}
+
+@media screen and (min-width: 1170px) {
+  #current span.vertical-timeline-element-date {
+    color: #000 !important
+  }
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+}
