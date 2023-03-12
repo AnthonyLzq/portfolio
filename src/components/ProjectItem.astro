@@ -9,6 +9,8 @@ export interface Props {
   url: string
   tech: Tech[]
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down'
+  boxSizing?: 'border-box' | 'content-box'
+  paddingTop?: string
 }
 
 const {
@@ -17,7 +19,9 @@ const {
   image,
   url,
   tech,
-  objectFit = 'cover'
+  objectFit = 'cover',
+  boxSizing = 'content-box',
+  paddingTop = '0px'
 } = Astro.props
 ---
 
@@ -35,7 +39,7 @@ const {
   </section>
 </article>
 
-<style define:vars={{ objectFit }}>
+<style define:vars={{ objectFit, boxSizing, paddingTop }}>
   .container {
     box-sizing: border-box;
     display: flex;
@@ -62,6 +66,8 @@ const {
     height: 100%;
     object-fit: var(--objectFit);
     border-radius: 20px 20px 0px 0px;
+    box-sizing: var(--boxSizing);
+    padding-top: var(--paddingTop);
   }
 
   div#stack_container {
