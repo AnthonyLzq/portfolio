@@ -1,7 +1,7 @@
 ---
 title: 'How to Create Custom Headers with Express and TypeScript'
 pubDate: 2021-10-17
-description: 'A brief explanation of how to create Custom Headers with Express and Typescript'
+description: 'Brief explanation of how to create Custom Headers with Express and Typescript'
 author: 'AnthonyLzq'
 image:
   url: 'https://miro.medium.com/max/720/1*onOQ8hrfZ1aGS0ppzpDN2w.webp'
