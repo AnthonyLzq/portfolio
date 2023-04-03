@@ -5,6 +5,8 @@ import {
   EReCaptchaV2Theme,
   EReCaptchaV2Size
 } from 'react-recaptcha-x'
+
+import Social from './Social'
 import { useToken } from '../hooks'
 import { useIsMobile } from '../hooks/useIsMobile'
 
@@ -101,22 +103,25 @@ const Recaptcha = () => {
                 />
               </div>
             </ReCaptchaProvider>{' '}
-            <button
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#34c749',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer'
-              }}
-              onClick={() => {
-                onClick()
-              }}
-              disabled={captchaToken === ''}
-            >
-              Send
-            </button>
+            <div className='button-links-container'>
+              <Social height='24px' />
+              <button
+                style={{
+                  padding: '10px 20px',
+                  backgroundColor: '#34c749',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer'
+                }}
+                onClick={() => {
+                  onClick()
+                }}
+                disabled={captchaToken === ''}
+              >
+                Send
+              </button>
+            </div>
           </section>
         </div>
       </div>
