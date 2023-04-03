@@ -4,11 +4,11 @@ type Props = {
   href: string
   image: string
   name: string
-  height: string
+  height?: string
 }
 
 const Icon: FC<Props> = props => {
-  const { href, image, name, height } = props
+  const { href, image, name, height = '50px' } = props
 
   return (
     <a
