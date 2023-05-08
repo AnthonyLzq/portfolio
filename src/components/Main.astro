@@ -1,5 +1,6 @@
 ---
 import Social from './Social'
+import profilePhoto from '../static/images/profile.png'
 ---
 
 <article id='profile'>
@@ -7,10 +8,7 @@ import Social from './Social'
     <section id='profile__description'>
       <h1>Anthony Luzquiños</h1>
       <section id='profile__description__photo'>
-        <img
-          src='https://avatars.githubusercontent.com/u/43073718?s=400&u=aec2fb80a012b0d5ec19c1368ccb796638860cad&v=4'
-          alt='profile'
-        />
+        <img src={profilePhoto} alt='profile' />
       </section>
       <h2>Full Stack Developer</h2>
       <p>
@@ -21,10 +19,7 @@ import Social from './Social'
       <Social />
     </section>
     <section id='profile__photo'>
-      <img
-        src='https://avatars.githubusercontent.com/u/43073718?s=400&u=aec2fb80a012b0d5ec19c1368ccb796638860cad&v=4'
-        alt='profile'
-      />
+      <img src={profilePhoto} alt='profile' />
     </section>
   </div>
 </article>
