@@ -7,7 +7,7 @@ image:
   url: 'https://miro.medium.com/max/720/1*onOQ8hrfZ1aGS0ppzpDN2w.webp'
   alt: 'TS, Express and Node.js'
 layout: ../../layouts/PostLayout.astro
-tags: ['typescript', 'node.js', 'express']
+tags: ['TypeScript', 'Node.js', 'Express']
 ---
 
 # How to create Custom Headers with Express and TypeScript

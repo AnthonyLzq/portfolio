@@ -7,7 +7,7 @@ image:
   url: 'https://miro.medium.com/max/4800/1*3Xpa877YwMG7Qsqio3KSfQ.webp'
   alt: 'Deploying a Node.js App to OCI'
 layout: ../../layouts/PostLayout.astro
-tags: ["typescript", "node.js"]
+tags: ["Typescript", "Node.js"]
 ---
 
 # Deploy a Node.js App to Oracle Cloud

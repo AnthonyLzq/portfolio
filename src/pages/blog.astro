@@ -22,6 +22,7 @@ const posts = await Astro.glob('./blog/*.md')
             pubDate={post.frontmatter.pubDate}
             description={post.frontmatter.description}
             minutesRead={post.frontmatter.minutesRead}
+            tags={post.frontmatter.tags}
             url={post.url}
           />
         ))

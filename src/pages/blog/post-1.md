@@ -7,7 +7,7 @@ image:
   url: 'https://cdn-images-1.medium.com/max/800/1*hy4Je0qslH_8SauYd5lzmw.jpeg'
   alt: 'A girl coding.'
 layout: ../../layouts/PostLayout.astro
-tags: ["typescript", "node.js"]
+tags: ["TypeScript", "Node.js"]
 ---
 # How to Create Global Variables in TypeScript with Node.js
 

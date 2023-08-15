@@ -4,10 +4,11 @@ export type Props = {
   pubDate: string
   description: string
   minutesRead: string
+  tags: string[]
   url?: string
 }
 
-const { title, pubDate, description, minutesRead, url } = Astro.props
+const { title, pubDate, description, minutesRead, tags, url } = Astro.props
 ---
 
 <article>
@@ -25,6 +26,9 @@ const { title, pubDate, description, minutesRead, url } = Astro.props
         }
       </span> &#8226;
       <span>{minutesRead}</span>
+    </div>
+    <div class='tags-container'>
+      {tags.map(tag => <span class='tag'>{tag}</span>)}
     </div>
   </a>
 </article>
@@ -57,5 +61,18 @@ const { title, pubDate, description, minutesRead, url } = Astro.props
 
   div {
     color: #333;
+  }
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .tag {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: lightblue;
   }
 </style>

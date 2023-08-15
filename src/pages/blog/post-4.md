@@ -7,7 +7,7 @@ author: 'AnthonyLzq'
 #   url: 'https://miro.medium.com/max/4800/1*3Xpa877YwMG7Qsqio3KSfQ.webp'
 #   alt: 'Deploying a Node.js App to OCI'
 layout: ../../layouts/PostLayout.astro
-tags: ["postgres", "postgresql", "docker", "docker-compose"]
+tags: ["PostgreSQL", "Docker", "docker-compose"]
 ---
 
 # How to dump an external PostgreSQL database using Docker
