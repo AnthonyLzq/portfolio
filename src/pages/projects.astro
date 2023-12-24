@@ -1,6 +1,6 @@
 ---
 import ProjectItem, {
-  Props as ProjectItemProps
+  type Props as ProjectItemProps
 } from '../components/ProjectItem.astro'
 import Layout from '../layouts/Layout.astro'
 import { tech } from '../utils'
@@ -75,8 +75,8 @@ const projects: ProjectItemProps[] = [
     title: 'Bus Geolocation',
     description: 'Geolocation of buses in Lima, Peru',
     image:
-      'https://bus-geolocation-back-office.vercel.app/build/_assets/BusGeolocation-Q4HQQVN5.png',
-    url: 'https://bus-geolocation-back-office.vercel.app',
+      'https://smarttransit.vercel.app/build/_assets/BusGeolocation-Q4HQQVN5.png',
+    url: 'https://smarttransit.vercel.app',
     tech: [
       tech.typescript,
       tech.node,
