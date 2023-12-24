@@ -25,82 +25,82 @@ export type Tech = {
 const tech: Record<string, Tech> = {
   typescript: {
     name: 'TypeScript',
-    image: typescript,
+    image: typescript.src,
     url: 'https://www.typescriptlang.org'
   },
   javascript: {
     name: 'JavaScript',
-    image: javascript,
+    image: javascript.src,
     url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'
   },
   node: {
     name: 'Node.js',
-    image: nodejs,
+    image: nodejs.src,
     url: 'https://nodejs.org'
   },
   express: {
     name: 'Express',
-    image: express,
+    image: express.src,
     url: 'https://expressjs.com'
   },
   fastify: {
     name: 'Fastify',
-    image: fastify,
+    image: fastify.src,
     url: 'https://fastify.io'
   },
   graphql: {
     name: 'GraphQL',
-    image: graphql,
+    image: graphql.src,
     url: 'https://graphql.org'
   },
   mongo: {
     name: 'MongoDB',
-    image: mongo,
+    image: mongo.src,
     url: 'https://www.mongodb.com'
   },
   postgres: {
     name: 'PostgreSQL',
-    image: postgres,
+    image: postgres.src,
     url: 'https://www.postgresql.org'
   },
   remix: {
     name: 'Remix',
-    image: remix,
+    image: remix.src,
     url: 'https://remix.run'
   },
   material: {
     name: 'MaterialUI',
-    image: mui,
+    image: mui.src,
     url: 'https://material-ui.com'
   },
   supabase: {
     name: 'Supabase',
-    image: supabase,
+    image: supabase.src,
     url: 'https://supabase.io'
   },
   prisma: {
     name: 'Prisma',
-    image: prisma,
+    image: prisma.src,
     url: 'https://www.prisma.io'
   },
   react: {
     name: 'React',
-    image: react,
+    image: react.src,
     url: 'https://reactjs.org'
   },
   'chart.js': {
     name: 'Chart.js',
-    image: chartjs,
+    image: chartjs.src,
     url: 'https://www.chartjs.org'
   },
   'mqtt.js': {
     name: 'MQTT.js',
-    image: mqttjs,
+    image: mqttjs.src,
     url: 'https://github.com/mqttjs/MQTT.js'
   },
   tensorflow: {
     name: 'TensorFlow',
-    image: tensorflow,
+    image: tensorflow.src,
     url: 'https://www.tensorflow.org'
   },
   raspberry: {
@@ -111,7 +111,7 @@ const tech: Record<string, Tech> = {
   },
   leaflet: {
     name: 'Leaflet',
-    image: leaflet,
+    image: leaflet.src,
     url: 'https://leafletjs.com/'
   }
 }
