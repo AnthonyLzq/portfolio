@@ -15,6 +15,7 @@ import chartjs from '../static/images/chartjs.svg'
 import mqttjs from '../static/images/mqttjs.png'
 import tensorflow from '../static/images/tensorflow.svg'
 import leaflet from '../static/images/leaflet.png'
+import astro from '../static/images/astro.png'
 
 export type Tech = {
   name: string
@@ -112,7 +113,12 @@ const tech: Record<string, Tech> = {
   leaflet: {
     name: 'Leaflet',
     image: leaflet.src,
-    url: 'https://leafletjs.com/'
+    url: 'https://leafletjs.com'
+  },
+  astro: {
+    name: 'Astro',
+    image: astro.src,
+    url: 'https://astro.build'
   }
 }
 
