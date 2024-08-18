@@ -4,7 +4,7 @@ pubDate: 2023-08-07
 description: 'A presentation of my library/framework to build TypeScript APIs'
 author: 'AnthonyLzq'
 layout: ../../layouts/PostLayout.astro
-tags: ["Simba.js", "TypeScript", "Node.js", "API", "Express", "Fastify", "GraphQL", "Prisma"]
+tags: ["TypeScript", "Node.js", "API", "Express", "Fastify", "GraphQL", "Prisma"]
 ---
 
 # Simba.js, the easiest way to start your TS APIs

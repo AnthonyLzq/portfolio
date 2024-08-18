@@ -2,7 +2,16 @@
 import BlogEntry from '../components/BlogEntry.astro'
 import Layout from '../layouts/Layout.astro'
 
-const posts = await Astro.glob('./blog/*.md')
+type BlogFrontmatter = {
+  title: string
+  pubDate: string
+  description: string
+  minutesRead: string
+  tags: string[]
+  url?: string
+}
+
+const posts = await Astro.glob<BlogFrontmatter>('./blog/*.md')
 ---
 
 <Layout title='Blog | AnthonyLzq'>

@@ -1,46 +1,60 @@
 ---
 import Social from './Social'
 import profilePhoto from '../static/images/profile.png'
+import logoAndName from '../static/images/logo-and-name.svg'
 ---
 
-<article id='profile'>
-  <div id='container'>
-    <section id='profile__description'>
-      <h1>Anthony Luzquiños</h1>
-      <section id='profile__description__photo'>
-        <img src={profilePhoto.src} alt='profile' />
-      </section>
-      <h2>Full Stack Developer</h2>
-      <p>
-        I'm a full stack developer with a passion for building great products. I
-        have experience building web applications with TypeScript, React and
-        Node.js.
+<article class='profile'>
+  <div class='profile__container'>
+    <section class='profile__description'>
+      <div class='profile__logo-container'>
+        <img
+          class='profile__logo'
+          src={logoAndName.src}
+          alt='AnthonyLzq svg logo'
+        />
+      </div>
+
+      <div class='profile__photo-container'>
+        <img
+          class='profile__photo'
+          src={profilePhoto.src}
+          alt='AthonyLzq profile photo'
+        />
+      </div>
+      <h1 class='profile__title'>I'm a Full Stack Developer...</h1>
+      <p class='profile__descrption-text'>
+        ...with a passion for building great products. I have experience
+        building web applications with TypeScript, React and Node.js.
       </p>
       <Social />
     </section>
-    <section id='profile__photo'>
-      <img src={profilePhoto.src} alt='profile' />
+
+    <section class='profile__photo-container-2'>
+      <img
+        class='profile__photo'
+        src={profilePhoto.src}
+        alt='AthonyLzq profile photo'
+      />
     </section>
   </div>
 </article>
 
 <style>
-  article {
+  .profile {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     justify-content: center;
     width: 100%;
-    column-gap: 4rem;
     min-height: calc(100vh - 66px - 2rem);
   }
 
-  div#container {
+  .profile__container {
     display: flex;
     flex-direction: row;
     align-items: center;
     column-gap: 2rem;
-    width: 75%;
+    width: 64%;
   }
 
   section {
@@ -48,54 +62,80 @@ import profilePhoto from '../static/images/profile.png'
     flex-direction: column;
   }
 
-  section#profile__description {
+  .profile__description {
     row-gap: 1.5rem;
   }
 
-  section#profile__description__photo {
+  .profile__photo-container {
     display: none;
   }
 
-  h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0;
+  .profile__logo-container {
+    width: 100%;
+    height: 200px;
   }
 
-  h2 {
+  .profile__logo {
+    height: 200px;
+  }
+
+  .profile__title {
     font-size: 2rem;
     font-weight: 600;
     margin: 0;
   }
 
-  p {
+  .profile__descrption-text {
+    text-wrap: balance;
     font-size: 1.5rem;
     font-weight: 400;
     margin: 0;
   }
 
-  ul {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin: 0 1rem;
-  }
-
-  img {
+  .profile__photo {
     width: 300px;
     height: 300px;
     border-radius: 50%;
   }
 
-  @media (max-width: 1124px) {
-    article {
+  @media screen and (width <= 1720px) {
+    .profile__container {
+      width: 70%;
+    }
+  }
+
+  @media screen and (width <= 1600px) {
+    .profile__container {
+      width: 75%;
+    }
+  }
+
+  @media screen and (width <= 1520px) {
+    .profile__container {
+      width: 80%;
+    }
+  }
+
+  @media screen and (width <= 1380px) {
+    .profile__container {
+      width: 85%;
+    }
+  }
+
+  @media screen and (width <= 1280px) {
+    .profile__container {
+      width: 90%;
+    }
+  }
+
+  @media screen and (width <= 1166px) {
+    .profile__container {
+      width: 95%;
+    }
+  }
+
+  @media screen and (width <= 1124px) {
+    .profile {
       flex-direction: column;
       text-align: center;
     }
@@ -104,50 +144,49 @@ import profilePhoto from '../static/images/profile.png'
       align-items: center;
     }
 
-    section#description {
-      row-gap: 1rem;
-    }
-
-    h1 {
+    .profile__title {
       font-size: 2rem;
     }
 
-    p {
+    .profile__descrption-text {
       font-size: 1.2rem;
       width: 80%;
     }
 
-    ul {
-      flex-direction: column;
-    }
-
-    li {
-      font-size: 1rem;
-      margin: 0.5rem 0;
-    }
-
-    img {
-      width: 200px;
-      height: 200px;
-    }
-    section#profile__description__photo {
+    .profile__photo-container {
       display: block;
     }
 
-    section#profile__photo {
+    .profile__photo-container-2 {
       display: none;
     }
   }
 
-  @media (max-width: 844px) {
-    p {
+  @media screen and (width <= 844px) {
+    .profile__descrption-text {
       width: 90%;
     }
   }
 
-  @media (max-width: 768px) {
-    p {
+  @media screen and (width <= 768px) {
+    .profile__logo-container {
+      height: auto;
+    }
+
+    .profile__logo {
+      height: auto;
       width: 100%;
+    }
+
+    .profile__descrption-text {
+      width: 100%;
+    }
+  }
+
+  @media screen and (width <= 540px) {
+    .profile__photo {
+      width: 100%;
+      height: auto;
     }
   }
 </style>

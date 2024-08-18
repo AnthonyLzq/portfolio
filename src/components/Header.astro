@@ -1,8 +1,9 @@
 ---
+import logo from '../static/images/logo.svg'
 ---
 
 <header>
-  <img src='https://acecom.dev/favicon.ico' alt='avatar' />
+  <img src={logo.src} alt='avatar' />
   <navbar>
     <input type='checkbox' id='checkbox_toggle' />
     <label for='checkbox_toggle'>&#9776;</label>
@@ -37,9 +38,8 @@
   }
 
   header img {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   header ul {

@@ -1,5 +1,5 @@
 ---
-title: 'How to dump an external PostgreSQL database using Docker'
+title: 'How to dump an external PostgreSQL db using Docker'
 pubDate: 2023-03-17
 description: 'Brief explanation of how to dump an external PostgreSQL database using Docker'
 author: 'AnthonyLzq'
