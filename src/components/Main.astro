@@ -128,7 +128,7 @@ import logoAndName from '../static/images/logo-and-name.svg'
     }
   }
 
-  @media screen and (width <= 1166px) {
+  @media screen and (width <= 1214px) {
     .profile__container {
       width: 95%;
     }
@@ -185,8 +185,19 @@ import logoAndName from '../static/images/logo-and-name.svg'
 
   @media screen and (width <= 540px) {
     .profile__photo {
-      width: 100%;
+      width: 240px;
       height: auto;
+    }
+  }
+
+  @media screen and (width <= 400px) {
+    .profile__photo {
+      width: 200px;
+      height: auto;
+    }
+
+    .profile__descrption-text {
+      font-size: 1rem;
     }
   }
 </style>

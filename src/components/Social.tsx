@@ -6,7 +6,7 @@ type Props = {
 }
 
 const Social: FC<Props> = props => {
-  const { height = '50px' } = props
+  const { height = '40px' } = props
 
   return (
     <div>
