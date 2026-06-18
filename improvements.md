@@ -12,7 +12,6 @@
 
 1. Corregir links rotos o inestables.
    - `https://thesis2.anthonylzq.dev` puede tardar en resolver mientras termina la configuracion DNS.
-   - `https://scr.anthonylzq.dev` no resuelve DNS.
    - `https://st.anthonylzq.dev` tiene certificado SSL expirado.
 2. Arreglar la experiencia de Contact.
    - En local ya no intenta pedir el token a una ruta `undefined/...`; ahora avisa si falta `PUBLIC_SERVER_URL`.
@@ -23,8 +22,9 @@
    - Resuelto: `og:url` ahora usa URLs canonicas absolutas.
    - Resuelto: `PostLayout.astro` genera metadata de articulo para posts.
 4. Reemplazar imagenes externas y placeholders.
-   - Evitar hotlinks a GitHub raw, Medium, npm, Google Storage y `picsum.photos`.
-   - Usar screenshots propios optimizados para proyectos.
+   - Resuelto: se quitaron placeholders `picsum.photos` de proyectos.
+   - Pendiente: evitar hotlinks a GitHub raw, Medium, npm y Google Storage.
+   - Pendiente: usar screenshots propios optimizados para proyectos.
 5. Mejorar conversion de la home.
    - Resuelto: la home tiene CTAs claros a proyectos, contacto y blog.
    - Resuelto: la propuesta de valor ahora es mas especifica.
@@ -35,7 +35,8 @@
 1. Mejorar navegacion movil.
    - El menu hamburguesa funciona, pero el control se expone como texto, no como boton semantico.
 2. Mejorar tarjetas de proyectos.
-   - Agregar problema, rol, impacto, estado del proyecto y links diferenciados a demo/repositorio.
+   - Resuelto: las tarjetas ahora muestran rol, estado, highlights y acciones diferenciadas.
+   - Pendiente: agregar impacto medible cuando existan metricas reales.
 3. Actualizar README.
    - Resuelto: el README ahora documenta stack, comandos, env vars y estructura del portfolio.
 4. Corregir warnings del build.

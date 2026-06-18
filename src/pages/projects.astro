@@ -3,15 +3,29 @@ import ProjectItem, {
   type Props as ProjectItemProps
 } from '../components/ProjectItem.astro'
 import Layout from '../layouts/Layout.astro'
+import acecomLogo from '../static/images/acecom-logo.svg'
 import { tech } from '../utils'
 
 const projects: ProjectItemProps[] = [
   {
     title: 'Simba.js',
     description: 'TypeScript framework for backend development.',
+    role: 'Creator / maintainer',
+    status: 'Open source',
+    highlights: [
+      'Framework and CLI for starting TypeScript APIs faster.',
+      'Supports REST, GraphQL, Express, Fastify and Prisma workflows.'
+    ],
     image:
       'https://raw.githubusercontent.com/AnthonyLzq/Simba.js/v7.2.1/static/simba.png',
     url: 'https://github.com/AnthonyLzq/simba.js',
+    links: [
+      {
+        href: 'https://github.com/AnthonyLzq/simba.js',
+        label: 'View source',
+        variant: 'primary'
+      }
+    ],
     tech: [
       tech.typescript,
       tech.javascript,
@@ -26,17 +40,43 @@ const projects: ProjectItemProps[] = [
   {
     title: 'TypeScript Project Generator',
     description: 'Minimalist TypeScript project generator for Node.js.',
+    role: 'Creator / maintainer',
+    status: 'Open source',
+    highlights: [
+      'CLI for bootstrapping TypeScript projects with less repetitive setup.',
+      'Focused on Node.js tooling and project conventions.'
+    ],
     image:
       'https://raw.githubusercontent.com/AnthonyLzq/typescript-project-generator/master/static/TypeScript-Project-Generator.png',
     url: 'https://github.com/AnthonyLzq/typescript-project-generator',
+    links: [
+      {
+        href: 'https://github.com/AnthonyLzq/typescript-project-generator',
+        label: 'View source',
+        variant: 'primary'
+      }
+    ],
     tech: [tech.typescript, tech.javascript, tech.node],
     objectFit: 'contain'
   },
   {
     title: 'ACECOM',
     description: "ACECOM's web page.",
-    image: 'https://acecom.dev/images/Marck5.png',
+    role: 'Web project',
+    status: 'Live site',
+    highlights: [
+      'Public website built with a modern Remix and React stack.',
+      'Integrated with Supabase, Prisma and Material UI.'
+    ],
+    image: acecomLogo.src,
     url: 'https://www.acecom.dev',
+    links: [
+      {
+        href: 'https://www.acecom.dev',
+        label: 'Open site',
+        variant: 'primary'
+      }
+    ],
     tech: [
       tech.typescript,
       tech.remix,
@@ -53,9 +93,20 @@ const projects: ProjectItemProps[] = [
     title: 'Thesis Project II',
     description:
       'Real Time Face Recognition and Communication using IoT protocols',
+    role: 'Thesis project',
+    status: 'DNS setup in progress',
+    highlights: [
+      'Face recognition and real-time communication using IoT protocols.',
+      'Combines web dashboards, MQTT, TensorFlow and Raspberry Pi devices.'
+    ],
     image:
       'https://firebasestorage.googleapis.com/v0/b/cc-planinfoextractor.appspot.com/o/uni_logo.png?alt=media',
     url: 'https://thesis2.anthonylzq.dev',
+    links: [
+      {
+        label: 'Demo pending DNS'
+      }
+    ],
     tech: [
       tech.typescript,
       tech.node,
@@ -74,32 +125,58 @@ const projects: ProjectItemProps[] = [
   {
     title: 'node-webcam',
     description: 'Node.js Cross-platform webcam module.',
+    role: 'Open source maintainer',
+    status: 'Node package',
+    highlights: [
+      'Cross-platform webcam integration for Node.js projects.',
+      'Useful for automation, image capture and hardware-adjacent workflows.'
+    ],
     image:
       'https://raw.githubusercontent.com/AnthonyLzq/node-webcam/master/static/node-webcam.png',
     url: 'https://github.com/AnthonyLzq/node-webcam',
+    links: [
+      {
+        href: 'https://github.com/AnthonyLzq/node-webcam',
+        label: 'View source',
+        variant: 'primary'
+      }
+    ],
     tech: [tech.typescript, tech.javascript, tech.node],
     objectFit: 'contain'
   },
   {
-    title: 'Shopping Cart',
-    description:
-      'Minimalist shopping cart with React, TypeScript, Material-UI and Vite.',
-    image: 'https://picsum.photos/300/200',
-    url: 'https://scr.anthonylzq.dev',
-    tech: [tech.typescript, tech.react, tech.material]
-  },
-  {
     title: 'Sum Time',
     description: 'Sum time in hours, minutes and seconds.',
-    image: 'https://picsum.photos/300/200',
-    url: 'https://st.anthonylzq.dev',
+    role: 'Utility app',
+    status: 'Certificate renewal pending',
+    highlights: [
+      'Small utility for adding durations in hours, minutes and seconds.',
+      'Built as a lightweight Astro and React application.'
+    ],
+    links: [
+      {
+        label: 'Demo pending certificate'
+      }
+    ],
     tech: [tech.astro, tech.typescript, tech.react]
   },
   {
     title: 'Color Generator',
     description: 'Get shades of CSS color.',
-    image: 'https://picsum.photos/300/200',
+    role: 'Utility app',
+    status: 'Live demo',
+    highlights: [
+      'Generates CSS color shades for interface work.',
+      'Built as a lightweight Astro and React application.'
+    ],
     url: 'https://cg.anthonylzq.dev',
+    links: [
+      {
+        href: 'https://cg.anthonylzq.dev',
+        label: 'Open demo',
+        variant: 'primary'
+      }
+    ],
     tech: [tech.astro, tech.typescript, tech.react]
   }
 ]
@@ -110,37 +187,25 @@ const projects: ProjectItemProps[] = [
   description='A selection of projects by Anthony Luzquiños, including TypeScript APIs, developer tooling, web applications and IoT experiments.'
 >
   <h1>Projects</h1>
+  <p class='projects-intro'>
+    Selected work across backend frameworks, developer tooling, web products,
+    utilities and IoT experiments.
+  </p>
   <section>{projects.map(project => <ProjectItem {...project} />)}</section>
 </Layout>
 
 <style>
+  .projects-intro {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 760px;
+    text-wrap: balance;
+  }
+
   section {
     display: grid;
     gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  }
-
-  @media (max-width: 1024px) {
-    section {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-  }
-
-  @media (max-width: 768px) {
-    section {
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    }
-  }
-
-  @media (max-width: 680px) {
-    section {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-  }
-
-  @media (max-width: 600px) {
-    section {
-      grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
-    }
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   }
 </style>

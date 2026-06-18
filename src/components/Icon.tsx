@@ -8,12 +8,13 @@ type Props = {
 }
 
 const Icon: FC<Props> = props => {
-  const { href, image, name, height = '50px' } = props
+  const { href, image, name, height = '42px' } = props
 
   return (
     <a
       href={href}
       target='_blank'
+      rel='noreferrer'
       style={{ textDecoration: 'none', color: '#000', cursor: 'pointer' }}
     >
       <img

@@ -2,11 +2,21 @@
 import Icon from './Icon'
 import type { Tech } from '../utils'
 
+export type ProjectLink = {
+  href?: string
+  label: string
+  variant?: 'primary' | 'secondary'
+}
+
 export interface Props {
   title: string
   description: string
-  image: string
-  url: string
+  image?: string
+  links?: ProjectLink[]
+  role?: string
+  status?: string
+  highlights?: string[]
+  url?: string
   tech: Tech[]
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down'
   boxSizing?: 'border-box' | 'content-box'
@@ -17,24 +27,97 @@ const {
   title,
   description,
   image,
+  links,
+  role,
+  status,
+  highlights = [],
   url,
   tech,
   objectFit = 'cover',
   boxSizing = 'content-box',
   paddingTop = '0px'
 } = Astro.props
+
+const actions = links ?? (url ? [{ href: url, label: 'Open project' }] : [])
 ---
 
 <article class='container'>
-  <a href={url} target='_blank'><img src={image} alt={title} /></a>
+  {
+    actions[0]?.href ? (
+      <a
+        class='project-media'
+        href={actions[0].href}
+        target='_blank'
+        rel='noreferrer'
+      >
+        {image ? (
+          <img src={image} alt={title} />
+        ) : (
+          <div class='project-placeholder' aria-hidden='true'>
+            <span>{title}</span>
+          </div>
+        )}
+      </a>
+    ) : (
+      <div class='project-media'>
+        {image ? (
+          <img src={image} alt={title} />
+        ) : (
+          <div class='project-placeholder' aria-hidden='true'>
+            <span>{title}</span>
+          </div>
+        )}
+      </div>
+    )
+  }
   <section>
-    <h3>{title}</h3>
+    <div class='project-heading'>
+      <h3>{title}</h3>
+      <div class='project-meta'>
+        {role && <span>{role}</span>}
+        {status && <span>{status}</span>}
+      </div>
+    </div>
     <div>
       <p>{description}</p>
+      {
+        highlights.length > 0 && (
+          <ul class='project-highlights'>
+            {highlights.map(highlight => (
+              <li>{highlight}</li>
+            ))}
+          </ul>
+        )
+      }
       <h4>Tech stack:</h4>
       <div id='stack_container'>
         {tech.map(t => <Icon href={t.url} image={t.image} name={t.name} />)}
       </div>
+      {
+        actions.length > 0 && (
+          <div class='project-actions'>
+            {actions.map(action =>
+              action.href ? (
+                <a
+                  class:list={[
+                    'project-action',
+                    action.variant === 'primary' && 'project-action--primary'
+                  ]}
+                  href={action.href}
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  {action.label}
+                </a>
+              ) : (
+                <span class='project-action project-action--disabled'>
+                  {action.label}
+                </span>
+              )
+            )}
+          </div>
+        )
+      }
     </div>
   </section>
 </article>
@@ -48,26 +131,111 @@ const {
     border: 1px solid lightblue;
     border-radius: 20px;
     align-items: center;
+    background-color: #fff;
+    overflow: hidden;
   }
 
   .container section {
     box-sizing: border-box;
     width: 100%;
-    padding: 0 1rem 0.5rem;
+    padding: 1rem;
   }
 
-  .container > a {
+  .project-media {
+    color: inherit;
+    display: block;
     width: 100%;
     height: 180px;
+    text-decoration: none;
   }
 
-  .container > a > img {
+  .project-media > img,
+  .project-placeholder {
     width: 100%;
     height: 100%;
     object-fit: var(--objectFit);
     border-radius: 20px 20px 0px 0px;
     box-sizing: var(--boxSizing);
     padding-top: var(--paddingTop);
+  }
+
+  .project-placeholder {
+    align-items: center;
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(59, 130, 246, 0.18),
+        transparent 35%
+      ),
+      linear-gradient(135deg, #eff6ff, #f8fafc);
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .project-placeholder span {
+    color: #1f2937;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .project-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .project-meta span {
+    background-color: #eef6ff;
+    border-radius: 999px;
+    color: #1f2937;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .project-highlights {
+    color: #333;
+    margin: 0 0 1rem;
+    padding-left: 1.2rem;
+  }
+
+  .project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .project-action {
+    border: 1px solid #111827;
+    border-radius: 999px;
+    color: #111827;
+    font-weight: 700;
+    padding: 0.6rem 0.9rem;
+    text-decoration: none;
+  }
+
+  .project-action--primary {
+    background-color: #111827;
+    color: #fff;
+  }
+
+  .project-action--disabled {
+    border-color: #cbd5e1;
+    color: #64748b;
+    cursor: not-allowed;
   }
 
   div#stack_container {
@@ -78,7 +246,7 @@ const {
   }
 
   @media (max-width: 400px) {
-    .container > a {
+    .project-media {
       height: 160px;
     }
   }
