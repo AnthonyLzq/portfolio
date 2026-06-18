@@ -7,7 +7,7 @@ author: 'AnthonyLzq'
 #   url: 'https://miro.medium.com/max/4800/1*3Xpa877YwMG7Qsqio3KSfQ.webp'
 #   alt: 'Deploying a Node.js App to OCI'
 layout: ../../layouts/PostLayout.astro
-tags: ["PostgreSQL", "Docker", "docker-compose"]
+tags: ['PostgreSQL', 'Docker', 'docker-compose']
 ---
 
 # How to dump an external PostgreSQL database using Docker
@@ -20,7 +20,7 @@ First of all, I will assume that you have basic knowledge of Docker, Docker comp
 
 Let’s begin, the first thing you have to do is to create a folder where you are going to save your DB. Go to that folder and create a `docker-compose.yml` file, there put the following:
 
-```docker-compose
+```yaml
 services:
   postgres:
     image: postgres:14

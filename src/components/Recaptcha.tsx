@@ -1,10 +1,4 @@
-import { useState } from 'react'
-import {
-  ReCaptchaProvider,
-  ReCaptchaV2,
-  EReCaptchaV2Theme,
-  EReCaptchaV2Size
-} from 'react-recaptcha-x'
+import { useEffect, useRef, useState } from 'react'
 
 import Social from './Social'
 import { useToken } from '../hooks'
@@ -12,20 +6,161 @@ import { useIsMobile } from '../hooks/useIsMobile'
 
 import '../styles/recaptcha.css'
 
+const RECAPTCHA_SCRIPT_ID = 'google-recaptcha'
+const RECAPTCHA_SITE_KEY = '6LfRX4okAAAAAEqe4RU2B5rH5tOvazQGil-5sqlp'
+
+type ReCaptchaSize = 'compact' | 'normal'
+
+type ReCaptchaRenderParameters = {
+  callback: (token: string) => void
+  'error-callback': () => void
+  'expired-callback': () => void
+  sitekey: string
+  size: ReCaptchaSize
+  theme: 'light'
+}
+
+type ReCaptchaApi = {
+  ready?: (callback: () => void) => void
+  render?: (
+    container: HTMLElement,
+    parameters: ReCaptchaRenderParameters
+  ) => number
+}
+
+declare global {
+  interface Window {
+    grecaptcha?: ReCaptchaApi
+  }
+}
+
+let recaptchaScriptPromise: Promise<void> | null = null
+
+const getLoadedRecaptcha = () => {
+  const recaptcha = window.grecaptcha
+
+  if (recaptcha?.render === undefined) {
+    return null
+  }
+
+  return recaptcha as ReCaptchaApi & Required<Pick<ReCaptchaApi, 'render'>>
+}
+
+const waitForRecaptcha = () => {
+  return new Promise<ReCaptchaApi & Required<Pick<ReCaptchaApi, 'render'>>>(
+    (resolve, reject) => {
+      const timeout = window.setTimeout(() => {
+        reject(new Error('Google reCAPTCHA did not finish loading'))
+      }, 5000)
+
+      const resolveWhenReady = () => {
+        const recaptcha = getLoadedRecaptcha()
+
+        if (recaptcha !== null) {
+          window.clearTimeout(timeout)
+          resolve(recaptcha)
+          return
+        }
+
+        window.setTimeout(resolveWhenReady, 50)
+      }
+
+      window.grecaptcha?.ready?.(resolveWhenReady)
+      resolveWhenReady()
+    }
+  )
+}
+
+const loadRecaptchaScript = async () => {
+  recaptchaScriptPromise ??= new Promise<void>((resolve, reject) => {
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      `#${RECAPTCHA_SCRIPT_ID}`
+    )
+    const script = existingScript ?? document.createElement('script')
+
+    script.addEventListener('load', () => resolve(), { once: true })
+    script.addEventListener(
+      'error',
+      () => {
+        recaptchaScriptPromise = null
+        reject(new Error('Failed to load Google reCAPTCHA'))
+      },
+      { once: true }
+    )
+
+    if (existingScript === null) {
+      script.id = RECAPTCHA_SCRIPT_ID
+      script.src =
+        'https://www.google.com/recaptcha/api.js?render=explicit&hl=en'
+      script.async = true
+      script.defer = true
+      document.head.appendChild(script)
+    }
+  })
+
+  await recaptchaScriptPromise
+
+  return await waitForRecaptcha()
+}
+
 const Recaptcha = () => {
   const [captchaToken, setCaptchaToken] = useState<string>('')
+  const recaptchaRef = useRef<HTMLDivElement>(null)
   const { token, randomUUID } = useToken()
   const isMobile = useIsMobile()
 
-  const onClick = () => {
-    import('../utils/sendMail')
-      .then(({ sendMail }) => {
-        sendMail(token ?? '', randomUUID)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+  const onClick = async () => {
+    try {
+      const { sendMail } = await import('../utils/sendMail')
+
+      await sendMail(token ?? '', randomUUID)
+    } catch (error) {
+      console.error(error)
+      alert('There was an error sending your message. Please try again.')
+    }
   }
+
+  useEffect(() => {
+    let cancelled = false
+
+    void (async () => {
+      try {
+        const recaptcha = await loadRecaptchaScript()
+
+        if (
+          cancelled ||
+          recaptchaRef.current === null ||
+          window.grecaptcha === undefined
+        ) {
+          return
+        }
+
+        recaptchaRef.current.replaceChildren()
+        setCaptchaToken('')
+        recaptcha.render(recaptchaRef.current, {
+          callback: token => {
+            setCaptchaToken(token)
+          },
+          'error-callback': () => {
+            setCaptchaToken('')
+          },
+          'expired-callback': () => {
+            setCaptchaToken('')
+          },
+          sitekey: RECAPTCHA_SITE_KEY,
+          size: isMobile ? 'compact' : 'normal',
+          theme: 'light'
+        })
+      } catch (error) {
+        console.error(error)
+      }
+    })()
+
+    return () => {
+      cancelled = true
+      recaptchaRef.current?.replaceChildren()
+    }
+  }, [isMobile])
 
   return (
     <>
@@ -76,33 +211,14 @@ const Recaptcha = () => {
                 className='input-message'
               ></textarea>
             </div>
-            <ReCaptchaProvider
-              siteKeyV2='6LfRX4okAAAAAEqe4RU2B5rH5tOvazQGil-5sqlp'
-              langCode='en'
-            >
-              <div
-                style={{
-                  marginBottom: '20px'
-                }}
-              >
-                <ReCaptchaV2
-                  callback={token => {
-                    if (typeof token === 'string') setCaptchaToken(token)
-                  }}
-                  theme={EReCaptchaV2Theme.Light}
-                  size={
-                    isMobile
-                      ? EReCaptchaV2Size.Compact
-                      : EReCaptchaV2Size.Normal
-                  }
-                  style={{
-                    display: 'grid',
-                    placeContent: 'center'
-                  }}
-                  key={String(isMobile)}
-                />
-              </div>
-            </ReCaptchaProvider>{' '}
+            <div
+              ref={recaptchaRef}
+              style={{
+                display: 'grid',
+                marginBottom: '20px',
+                placeContent: 'center'
+              }}
+            />
             <div className='button-links-container'>
               <Social height='24px' />
               <button
@@ -115,7 +231,7 @@ const Recaptcha = () => {
                   cursor: 'pointer'
                 }}
                 onClick={() => {
-                  onClick()
+                  void onClick()
                 }}
                 disabled={captchaToken === ''}
               >

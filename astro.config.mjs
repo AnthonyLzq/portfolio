@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config'
 import { remarkReadingTime } from './src/plugins/remarkReadingTime.mjs'
+import { unified } from '@astrojs/markdown-remark'
 import react from '@astrojs/react'
 
 // https://astro.build/config
@@ -9,8 +10,9 @@ import sitemap from '@astrojs/sitemap'
 export default defineConfig({
   site: 'https://anthonylzq.dev',
   markdown: {
-    remarkPlugins: [remarkReadingTime],
-    extendDefaultPlugins: true
+    processor: unified({
+      remarkPlugins: [remarkReadingTime]
+    })
   },
   integrations: [react(), sitemap()]
 })

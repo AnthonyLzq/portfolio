@@ -11,7 +11,14 @@ type BlogFrontmatter = {
   url?: string
 }
 
-const posts = await Astro.glob<BlogFrontmatter>('./blog/*.md')
+type BlogPost = {
+  frontmatter: BlogFrontmatter
+  url: string
+}
+
+const posts = await Promise.all(
+  Object.values(import.meta.glob<BlogPost>('./blog/*.md')).map(post => post())
+)
 ---
 
 <Layout title='Blog | AnthonyLzq'>

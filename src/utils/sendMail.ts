@@ -1,8 +1,27 @@
-/* eslint-disable @typescript-eslint/promise-function-async */
-const sendMail = (token: string, randomUUID: string) => {
-  if (!token) return
+const getFormElement = <Element extends HTMLInputElement | HTMLTextAreaElement>(
+  selector: string
+) => {
+  const element = document.querySelector<Element>(selector)
 
-  fetch(`${import.meta.env.PUBLIC_SERVER_URL as string}/${randomUUID}`, {
+  if (element === null) {
+    throw new Error(`Missing contact form element: ${selector}`)
+  }
+
+  return element
+}
+
+const sendMail = async (token: string, randomUUID: string) => {
+  if (!token) {
+    throw new Error('Cannot send contact form without an API token')
+  }
+
+  const serverUrl = import.meta.env.PUBLIC_SERVER_URL
+
+  if (typeof serverUrl !== 'string' || serverUrl.length === 0) {
+    throw new Error('Missing PUBLIC_SERVER_URL for contact form')
+  }
+
+  const response = await fetch(`${serverUrl}/${randomUUID}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -10,27 +29,22 @@ const sendMail = (token: string, randomUUID: string) => {
       'Api-Key': token
     },
     body: JSON.stringify({
-      subject: (
-        document.querySelector('input[name="name"]') as HTMLInputElement
-      ).value,
-      from: (document.querySelector('input[name="email"]') as HTMLInputElement)
-        .value,
-      text: (
-        document.querySelector(
-          'textarea[name="message"]'
-        ) as HTMLTextAreaElement
-      ).value
+      subject: getFormElement<HTMLInputElement>('input[name="name"]').value,
+      from: getFormElement<HTMLInputElement>('input[name="email"]').value,
+      text: getFormElement<HTMLTextAreaElement>('textarea[name="message"]')
+        .value
     })
   })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      alert('Message sent successfully!')
-      location.reload()
-    })
-    .catch(error => {
-      console.log(error)
-    })
+
+  if (!response.ok) {
+    throw new Error(`Failed to send message: ${response.status}`)
+  }
+
+  const data: unknown = await response.json()
+
+  console.log(data)
+  alert('Message sent successfully!')
+  location.reload()
 }
 
 export { sendMail }
