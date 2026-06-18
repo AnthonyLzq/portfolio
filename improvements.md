@@ -26,9 +26,9 @@
    - Evitar hotlinks a GitHub raw, Medium, npm, Google Storage y `picsum.photos`.
    - Usar screenshots propios optimizados para proyectos.
 5. Mejorar conversion de la home.
-   - Agregar CTAs claros: contacto, CV/resume y proyectos destacados.
-   - Hacer la propuesta de valor mas especifica.
-   - Incluir impacto o logros medibles.
+   - Resuelto: la home tiene CTAs claros a proyectos, contacto y blog.
+   - Resuelto: la propuesta de valor ahora es mas especifica.
+   - Pendiente: incluir impacto o logros medibles cuando haya metricas reales.
 
 ## Prioridad media
 
