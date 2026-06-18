@@ -33,7 +33,7 @@
 ## Prioridad media
 
 1. Mejorar navegacion movil.
-   - El menu hamburguesa funciona, pero el control se expone como texto, no como boton semantico.
+   - Resuelto: el menu hamburguesa usa un `button` semantico con `aria-expanded` y `aria-controls`.
 2. Mejorar tarjetas de proyectos.
    - Resuelto: las tarjetas ahora muestran rol, estado, highlights y acciones diferenciadas.
    - Pendiente: agregar impacto medible cuando existan metricas reales.

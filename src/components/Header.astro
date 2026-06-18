@@ -3,18 +3,25 @@ import logo from '../static/images/logo.svg'
 ---
 
 <header>
-  <img src={logo.src} alt='avatar' />
-  <navbar>
-    <input type='checkbox' id='checkbox_toggle' />
-    <label for='checkbox_toggle'>&#9776;</label>
-    <ul class='hidden'>
+  <img src={logo.src} alt='AnthonyLzq logo' />
+  <nav aria-label='Main navigation'>
+    <button
+      class='menu-toggle'
+      type='button'
+      aria-expanded='false'
+      aria-controls='main-navigation'
+    >
+      <span class='sr-only'>Toggle navigation menu</span>
+      <span aria-hidden='true'>☰</span>
+    </button>
+    <ul id='main-navigation' class='nav-list' data-open='false'>
       <li><a href='/'>About me</a></li>
       <li><a href='/experience'>Experience</a></li>
       <li><a href='/projects'>Projects</a></li>
       <li><a href='/blog'>Blog</a></li>
       <li><a href='/contact'>Contact</a></li>
     </ul>
-  </navbar>
+  </nav>
 </header>
 
 <style>
@@ -28,13 +35,9 @@ import logo from '../static/images/logo.svg'
     height: 66px;
   }
 
-  navbar {
+  nav {
     display: flex;
-  }
-
-  navbar input,
-  label {
-    display: none;
+    align-items: center;
   }
 
   header img {
@@ -42,7 +45,20 @@ import logo from '../static/images/logo.svg'
     height: 2.5rem;
   }
 
-  header ul {
+  .menu-toggle {
+    display: none;
+  }
+
+  .sr-only {
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .nav-list {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,34 +69,37 @@ import logo from '../static/images/logo.svg'
     z-index: 2;
   }
 
-  header ul li {
+  .nav-list li {
     font-size: 1.2rem;
     font-weight: 500;
     color: #000;
     cursor: pointer;
   }
 
-  header ul li:hover {
+  .nav-list li:hover {
     color: #666;
   }
 
-  header ul li a {
+  .nav-list li a {
     text-decoration: none;
     color: #000;
   }
 
   @media (max-width: 768px) {
-    .hidden {
-      visibility: hidden;
-    }
-
-    navbar label {
-      display: block;
+    .menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0;
+      border: 0;
+      background-color: transparent;
       font-size: 2rem;
       cursor: pointer;
     }
 
-    navbar ul {
+    .nav-list {
       position: fixed;
       display: flex;
       flex-direction: column;
@@ -95,11 +114,15 @@ import logo from '../static/images/logo.svg'
       min-width: 86px;
     }
 
-    #checkbox_toggle ~ ul li {
+    .nav-list[data-open='false'] {
+      display: none;
+    }
+
+    .nav-list li {
       width: 100%;
     }
 
-    #checkbox_toggle:checked ~ ul li::after {
+    .nav-list li::after {
       content: ' ';
       display: block;
       width: 10%;
@@ -111,30 +134,8 @@ import logo from '../static/images/logo.svg'
       margin-top: 2px;
     }
 
-    #checkbox_toggle:checked ~ ul li:hover::after {
+    .nav-list li:hover::after {
       animation: bigger 0.2s linear forwards;
-    }
-
-    @keyframes slideRight {
-      0% {
-        opacity: 1;
-        transform: translateX(0%);
-      }
-      100% {
-        opacity: 0;
-        transform: translateX(100%);
-      }
-    }
-
-    @keyframes slideLeft {
-      0% {
-        opacity: 0;
-        transform: translateX(100%);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0%);
-      }
     }
 
     @keyframes bigger {
@@ -149,27 +150,29 @@ import logo from '../static/images/logo.svg'
 </style>
 
 <script>
-  const css = `
-#checkbox_toggle:not(:checked) ~ ul {
-animation: slideRight 0.25s linear forwards;
-}
+  const menuToggle = document.querySelector<HTMLButtonElement>('.menu-toggle')
+  const menu = document.querySelector<HTMLUListElement>('#main-navigation')
 
-#checkbox_toggle:checked ~ ul {
-animation: slideLeft 0.25s linear forwards;
-}
-`
-  const head = document.head || document.getElementsByTagName('head')[0]
-  const style = document.createElement('style')
-  let clicked = false
+  const setMenuOpen = (open: boolean) => {
+    menuToggle?.setAttribute('aria-expanded', String(open))
+    menu?.setAttribute('data-open', String(open))
+  }
 
-  const element = document.querySelector('#checkbox_toggle')
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true'
 
-  element?.addEventListener('click', () => {
-    if (!clicked) {
-      document.querySelector('ul')?.classList.remove('hidden')
-      style.appendChild(document.createTextNode(css))
-      head.appendChild(style)
-      clicked = !clicked
+    setMenuOpen(!isOpen)
+  })
+
+  menu?.addEventListener('click', event => {
+    if (event.target instanceof HTMLAnchorElement) {
+      setMenuOpen(false)
+    }
+  })
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      setMenuOpen(false)
     }
   })
 </script>
