@@ -2,19 +2,23 @@
 import { SEO } from 'astro-seo'
 
 import Header from '../components/Header.astro'
+import { postFrontmatterSchema } from '../schemas/postFrontmatter'
 import { SITE } from '../site'
 import profilePhoto from '../static/images/profile.png'
 
-const { frontmatter } = Astro.props
+export interface Props {
+  frontmatter: unknown
+}
+
+const frontmatter = postFrontmatterSchema.parse(Astro.props.frontmatter)
 const title = `${frontmatter.title} | ${SITE.name}`
-const description = frontmatter.description ?? SITE.description
+const description = frontmatter.description
 const canonicalUrl = new URL(Astro.url.pathname, SITE.url).href
 const defaultImage = new URL(profilePhoto.src, SITE.url).href
 const image = frontmatter.image?.url ?? defaultImage
 const imageAlt = frontmatter.image?.alt ?? title
-const publishedTime = frontmatter.pubDate
-  ? new Date(frontmatter.pubDate).toISOString()
-  : undefined
+const publishedTime = new Date(frontmatter.pubDate).toISOString()
+const author = frontmatter.author ?? SITE.author
 ---
 
 <html lang='en'>
@@ -43,7 +47,7 @@ const publishedTime = frontmatter.pubDate
         },
         article: {
           publishedTime,
-          authors: [SITE.author],
+          authors: [author],
           section: 'Blog',
           tags: frontmatter.tags
         }

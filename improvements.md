@@ -45,10 +45,10 @@
 5. Formalizar scripts de calidad.
    - Resuelto: se agregaron scripts `lint` y `check`.
    - Resuelto: ESLint fue migrado a flat config y corre sin errores.
-6. Tipar explicitamente el frontmatter de posts.
-   - `PostLayout.astro` recibe `frontmatter` desde Markdown como `any`.
-   - Declarar una interfaz `Props` para `title`, `description`, `pubDate`, `tags`, `image`, etc.
-   - Esto evita casts implicitos y mejora autocompletado/seguridad al editar metadata de posts.
+6. Tipar y validar explicitamente el frontmatter de posts.
+   - Resuelto: `src/schemas/postFrontmatter.ts` declara `postFrontmatterSchema` con Zod.
+   - Resuelto: `title`, `description`, `pubDate`, `tags`, `author` e `image` ya estan tipados.
+   - Resuelto: el layout valida el shape del frontmatter con Zod y falla si falta metadata requerida.
 
 ## Paquetes
 
