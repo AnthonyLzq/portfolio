@@ -104,3 +104,24 @@ h1 {
   justify-content: space-between;
   align-items: center;
 }
+
+.form-status {
+  border-radius: 5px;
+  margin: 0 0 20px;
+  padding: 10px;
+}
+
+.form-status--error {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.form-status--sending {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.form-status--success {
+  background-color: #dcfce7;
+  color: #166534;
+}

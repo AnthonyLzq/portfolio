@@ -2,6 +2,12 @@ import { useEffect, useState } from 'react'
 
 const randomUUID = crypto.randomUUID()
 
+const getErrorMessage = (error: unknown) => {
+  return error instanceof Error
+    ? error.message
+    : 'Failed to request contact token'
+}
+
 const isTokenResponse = (data: unknown): data is { token: string } => {
   return (
     typeof data === 'object' &&
@@ -12,6 +18,8 @@ const isTokenResponse = (data: unknown): data is { token: string } => {
 }
 
 const useToken = () => {
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
   const [token, setToken] = useState<string | null>(null)
 
   useEffect(() => {
@@ -35,6 +43,7 @@ const useToken = () => {
       const data: unknown = await response.json()
 
       if (isTokenResponse(data)) {
+        setError(null)
         setToken(data.token)
         return
       }
@@ -42,12 +51,19 @@ const useToken = () => {
       throw new Error('Invalid contact token response')
     }
 
-    loadToken().catch(error => {
-      console.warn(error)
-    })
+    void loadToken()
+      .then(undefined, error => {
+        const message = getErrorMessage(error)
+
+        setError(message)
+        console.warn(error)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }, [])
 
-  return { token, randomUUID }
+  return { error, loading, token, randomUUID }
 }
 
 export { useToken }

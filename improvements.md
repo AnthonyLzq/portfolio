@@ -15,8 +15,9 @@
    - `https://st.anthonylzq.dev` tiene certificado SSL expirado.
 2. Arreglar la experiencia de Contact.
    - En local ya no intenta pedir el token a una ruta `undefined/...`; ahora avisa si falta `PUBLIC_SERVER_URL`.
-   - El formulario todavia deberia mostrar errores inline en lugar de depender de alerts o consola.
-   - El token de reCAPTCHA deberia enviarse y validarse realmente en el backend.
+   - Resuelto: el formulario muestra errores y estado de envio inline.
+   - Resuelto: el frontend envia el token de reCAPTCHA en el payload.
+   - Pendiente: validar realmente el token de reCAPTCHA en el backend.
 3. Unificar SEO y metadata social.
    - Resuelto: `Layout.astro` y `PostLayout.astro` usan `https://anthonylzq.dev` de forma consistente.
    - Resuelto: `og:url` ahora usa URLs canonicas absolutas.

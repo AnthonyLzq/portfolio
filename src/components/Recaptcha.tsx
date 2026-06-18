@@ -28,6 +28,17 @@ type ReCaptchaApi = {
   ) => number
 }
 
+type FormStatus = {
+  message: string
+  type: 'error' | 'sending' | 'success'
+}
+
+const getFormValue = (formData: FormData, field: string) => {
+  const value = formData.get(field)
+
+  return typeof value === 'string' ? value.trim() : ''
+}
+
 declare global {
   interface Window {
     grecaptcha?: ReCaptchaApi
@@ -105,18 +116,67 @@ const loadRecaptchaScript = async () => {
 
 const Recaptcha = () => {
   const [captchaToken, setCaptchaToken] = useState<string>('')
+  const [formStatus, setFormStatus] = useState<FormStatus | null>(null)
   const recaptchaRef = useRef<HTMLDivElement>(null)
-  const { token, randomUUID } = useToken()
+  const {
+    error: tokenError,
+    loading: tokenLoading,
+    token,
+    randomUUID
+  } = useToken()
   const isMobile = useIsMobile()
 
-  const onClick = async () => {
+  const submitContactForm = async (form: HTMLFormElement) => {
+    const formData = new FormData(form)
+    const subject = getFormValue(formData, 'name')
+    const from = getFormValue(formData, 'email')
+    const text = getFormValue(formData, 'message')
+
+    if (token === null) {
+      setFormStatus({
+        message: tokenError ?? 'Contact form is not ready yet.',
+        type: 'error'
+      })
+      return
+    }
+
+    if (captchaToken === '') {
+      setFormStatus({
+        message: 'Please complete the reCAPTCHA before sending your message.',
+        type: 'error'
+      })
+      return
+    }
+
+    setFormStatus({
+      message: 'Sending your message...',
+      type: 'sending'
+    })
+
     try {
       const { sendMail } = await import('../utils/sendMail')
 
-      await sendMail(token ?? '', randomUUID)
+      await sendMail({
+        captchaToken,
+        from,
+        randomUUID,
+        subject,
+        text,
+        token
+      })
+
+      form.reset()
+      setCaptchaToken('')
+      setFormStatus({
+        message: 'Message sent successfully!',
+        type: 'success'
+      })
     } catch (error) {
       console.error(error)
-      alert('There was an error sending your message. Please try again.')
+      setFormStatus({
+        message: 'There was an error sending your message. Please try again.',
+        type: 'error'
+      })
     }
   }
 
@@ -175,7 +235,13 @@ const Recaptcha = () => {
             </div>
             <div className='right-site'></div>
           </section>
-          <section id='form'>
+          <form
+            id='form'
+            onSubmit={event => {
+              event.preventDefault()
+              void submitContactForm(event.currentTarget)
+            }}
+          >
             <div className='form-name'>
               <label htmlFor='name' style={{ marginBottom: '5px' }}>
                 Name:
@@ -219,9 +285,24 @@ const Recaptcha = () => {
                 placeContent: 'center'
               }}
             />
+            {(tokenError ?? formStatus?.message) && (
+              <p
+                className={`form-status form-status--${
+                  tokenError !== null ? 'error' : formStatus?.type
+                }`}
+                role={
+                  tokenError !== null || formStatus?.type === 'error'
+                    ? 'alert'
+                    : 'status'
+                }
+              >
+                {tokenError ?? formStatus?.message}
+              </p>
+            )}
             <div className='button-links-container'>
               <Social height='24px' />
               <button
+                type='submit'
                 style={{
                   padding: '10px 20px',
                   backgroundColor: '#34c749',
@@ -230,15 +311,18 @@ const Recaptcha = () => {
                   borderRadius: '5px',
                   cursor: 'pointer'
                 }}
-                onClick={() => {
-                  void onClick()
-                }}
-                disabled={captchaToken === ''}
+                disabled={
+                  captchaToken === '' ||
+                  token === null ||
+                  tokenError !== null ||
+                  tokenLoading ||
+                  formStatus?.type === 'sending'
+                }
               >
-                Send
+                {formStatus?.type === 'sending' ? 'Sending...' : 'Send'}
               </button>
             </div>
-          </section>
+          </form>
         </div>
       </div>
     </>

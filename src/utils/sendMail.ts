@@ -1,18 +1,21 @@
-const getFormElement = <Element extends HTMLInputElement | HTMLTextAreaElement>(
-  selector: string
-) => {
-  const element = document.querySelector<Element>(selector)
-
-  if (element === null) {
-    throw new Error(`Missing contact form element: ${selector}`)
-  }
-
-  return element
+type SendMailInput = {
+  captchaToken: string
+  from: string
+  randomUUID: string
+  subject: string
+  text: string
+  token: string
 }
 
-const sendMail = async (token: string, randomUUID: string) => {
+const sendMail = async (input: SendMailInput) => {
+  const { captchaToken, from, randomUUID, subject, text, token } = input
+
   if (!token) {
     throw new Error('Cannot send contact form without an API token')
+  }
+
+  if (!captchaToken) {
+    throw new Error('Cannot send contact form without a reCAPTCHA token')
   }
 
   const serverUrl = import.meta.env.PUBLIC_SERVER_URL
@@ -29,10 +32,10 @@ const sendMail = async (token: string, randomUUID: string) => {
       'Api-Key': token
     },
     body: JSON.stringify({
-      subject: getFormElement<HTMLInputElement>('input[name="name"]').value,
-      from: getFormElement<HTMLInputElement>('input[name="email"]').value,
-      text: getFormElement<HTMLTextAreaElement>('textarea[name="message"]')
-        .value
+      captchaToken,
+      from,
+      subject,
+      text
     })
   })
 
@@ -40,11 +43,7 @@ const sendMail = async (token: string, randomUUID: string) => {
     throw new Error(`Failed to send message: ${response.status}`)
   }
 
-  const data: unknown = await response.json()
-
-  console.log(data)
-  alert('Message sent successfully!')
-  location.reload()
+  return (await response.json()) as unknown
 }
 
 export { sendMail }
