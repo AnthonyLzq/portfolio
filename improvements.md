@@ -19,9 +19,9 @@
    - El formulario todavia deberia mostrar errores inline en lugar de depender de alerts o consola.
    - El token de reCAPTCHA deberia enviarse y validarse realmente en el backend.
 3. Unificar SEO y metadata social.
-   - `astro.config.mjs` usa `https://anthonylzq.dev`, pero Open Graph/Twitter usan `anthonylz.dev`.
-   - `og:url` no incluye protocolo.
-   - `PostLayout.astro` no tiene metadata rica por post.
+   - Resuelto: `Layout.astro` y `PostLayout.astro` usan `https://anthonylzq.dev` de forma consistente.
+   - Resuelto: `og:url` ahora usa URLs canonicas absolutas.
+   - Resuelto: `PostLayout.astro` genera metadata de articulo para posts.
 4. Reemplazar imagenes externas y placeholders.
    - Evitar hotlinks a GitHub raw, Medium, npm, Google Storage y `picsum.photos`.
    - Usar screenshots propios optimizados para proyectos.
@@ -37,13 +37,17 @@
 2. Mejorar tarjetas de proyectos.
    - Agregar problema, rol, impacto, estado del proyecto y links diferenciados a demo/repositorio.
 3. Actualizar README.
-   - Actualmente conserva contenido del starter kit de Astro.
+   - Resuelto: el README ahora documenta stack, comandos, env vars y estructura del portfolio.
 4. Corregir warnings del build.
    - Resuelto: `client:only` ahora usa `client:only="react"`.
    - Resuelto: el bloque markdown `docker-compose` ahora usa `yaml` para Shiki.
 5. Formalizar scripts de calidad.
    - Resuelto: se agregaron scripts `lint` y `check`.
    - Resuelto: ESLint fue migrado a flat config y corre sin errores.
+6. Tipar explicitamente el frontmatter de posts.
+   - `PostLayout.astro` recibe `frontmatter` desde Markdown como `any`.
+   - Declarar una interfaz `Props` para `title`, `description`, `pubDate`, `tags`, `image`, etc.
+   - Esto evita casts implicitos y mejora autocompletado/seguridad al editar metadata de posts.
 
 ## Paquetes
 

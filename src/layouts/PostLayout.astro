@@ -1,15 +1,66 @@
 ---
+import { SEO } from 'astro-seo'
+
 import Header from '../components/Header.astro'
+import { SITE } from '../site'
+import profilePhoto from '../static/images/profile.png'
 
 const { frontmatter } = Astro.props
+const title = `${frontmatter.title} | ${SITE.name}`
+const description = frontmatter.description ?? SITE.description
+const canonicalUrl = new URL(Astro.url.pathname, SITE.url).href
+const defaultImage = new URL(profilePhoto.src, SITE.url).href
+const image = frontmatter.image?.url ?? defaultImage
+const imageAlt = frontmatter.image?.alt ?? title
+const publishedTime = frontmatter.pubDate
+  ? new Date(frontmatter.pubDate).toISOString()
+  : undefined
 ---
 
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <title>{frontmatter.title}</title>
+    <link rel='icon' href='/favicon.ico' />
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonicalUrl}
+      openGraph={{
+        basic: {
+          title,
+          type: 'article',
+          image,
+          url: canonicalUrl
+        },
+        optional: {
+          description,
+          locale: SITE.locale,
+          siteName: SITE.name
+        },
+        image: {
+          alt: imageAlt
+        },
+        article: {
+          publishedTime,
+          authors: [SITE.author],
+          section: 'Blog',
+          tags: frontmatter.tags
+        }
+      }}
+      twitter={{
+        card: 'summary_large_image',
+        creator: SITE.twitterHandle,
+        description,
+        image,
+        imageAlt,
+        site: SITE.twitterHandle,
+        title
+      }}
+      extend={{
+        link: [{ rel: 'icon', href: '/favicon.ico' }]
+      }}
+    />
   </head>
   <body>
     <Header />

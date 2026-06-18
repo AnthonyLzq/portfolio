@@ -2,12 +2,27 @@
 import { SEO } from 'astro-seo'
 
 import Header from '../components/Header.astro'
+import profilePhoto from '../static/images/profile.png'
+import { SITE } from '../site'
 
 export interface Props {
   title: string
+  description?: string
+  image?: string
+  imageAlt?: string
+  type?: 'article' | 'profile' | 'website'
 }
 
-const { title } = Astro.props
+const {
+  title,
+  description = SITE.description,
+  image,
+  imageAlt = SITE.title,
+  type = 'website'
+} = Astro.props
+const canonicalUrl = new URL(Astro.url.pathname, SITE.url).href
+const defaultImage = new URL(profilePhoto.src, SITE.url).href
+const socialImage = image ?? defaultImage
 ---
 
 <!doctype html>
@@ -15,38 +30,38 @@ const { title } = Astro.props
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='icon' href='/favicon.ico' />
     <meta name='generator' content={Astro.generator} />
     <SEO
       title={title}
-      description='Anthony Luzquiños - Full Stack Developer'
+      description={description}
+      canonical={canonicalUrl}
       openGraph={{
         basic: {
-          title: 'Anthony Luzquiños - Full Stack Developer',
-          url: 'anthonylz.dev',
-          type: 'website',
-          image: 'https://avatars.githubusercontent.com/u/43073718?v=4'
+          title,
+          url: canonicalUrl,
+          type,
+          image: socialImage
         },
         optional: {
-          description:
-            "I'm a full stack developer with a passion for building great products. I have experience building web applications with TypeScript, React and Node.js.",
-          locale: 'en_US'
+          description,
+          locale: SITE.locale,
+          siteName: SITE.name
         },
         image: {
-          alt: 'Anthony Luzquiños - Full Stack Developer'
+          alt: imageAlt
         }
       }}
       twitter={{
-        title: 'Anthony Luzquiños - Full Stack Developer',
-        creator: '@Anthony_Lzq',
         card: 'summary_large_image',
-        site: 'https://anthonylz.dev',
-        description:
-          "I'm a full stack developer with a passion for building great products. I have experience building web applications with TypeScript, React and Node.js.",
-        image: 'https://avatars.githubusercontent.com/u/43073718?v=4'
+        creator: SITE.twitterHandle,
+        description,
+        image: socialImage,
+        imageAlt,
+        site: SITE.twitterHandle,
+        title
       }}
       extend={{
-        // extending the default link tags
         link: [{ rel: 'icon', href: '/favicon.ico' }]
       }}
     />

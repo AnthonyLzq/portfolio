@@ -105,7 +105,10 @@ const projects: ProjectItemProps[] = [
 ]
 ---
 
-<Layout title='Projects | AnthonyLzq'>
+<Layout
+  title='Projects | AnthonyLzq'
+  description='A selection of projects by Anthony Luzquiños, including TypeScript APIs, developer tooling, web applications and IoT experiments.'
+>
   <h1>Projects</h1>
   <section>{projects.map(project => <ProjectItem {...project} />)}</section>
 </Layout>
