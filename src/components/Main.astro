@@ -27,21 +27,14 @@ import logoAndName from '../static/images/logo-and-name.svg'
         I build TypeScript products, APIs and developer tools.
       </h1>
       <p class='profile__description-text'>
-        I work across React, Node.js and backend systems, with a focus on clear
-        architecture, automation and practical products that are easy to evolve.
+        I work across React frontends, Node.js APIs and automation, with a focus
+        on clear architecture and practical products that are easy to evolve.
       </p>
       <div class='profile__highlights' aria-label='Main skills'>
         <span>TypeScript-first</span>
         <span>React + Node.js</span>
         <span>APIs and automation</span>
       </div>
-      <nav class='profile__actions' aria-label='Primary actions'>
-        <a class='profile__action profile__action--primary' href='/projects'>
-          View projects
-        </a>
-        <a class='profile__action' href='/contact'>Contact me</a>
-        <a class='profile__action' href='/blog'>Read blog</a>
-      </nav>
       <Social />
     </section>
 
@@ -136,34 +129,6 @@ import logoAndName from '../static/images/logo-and-name.svg'
     padding: 0.5rem 0.85rem;
   }
 
-  .profile__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .profile__action {
-    align-items: center;
-    border: 1px solid #111827;
-    border-radius: 999px;
-    color: #111827;
-    display: inline-flex;
-    font-weight: 700;
-    justify-content: center;
-    min-height: 44px;
-    padding: 0 1rem;
-    text-decoration: none;
-  }
-
-  .profile__action--primary {
-    background-color: #111827;
-    color: #fff;
-  }
-
-  .profile__action:hover {
-    opacity: 0.8;
-  }
-
   .profile__photo {
     width: 300px;
     height: 300px;
@@ -225,7 +190,6 @@ import logoAndName from '../static/images/logo-and-name.svg'
       width: 80%;
     }
 
-    .profile__actions,
     .profile__highlights {
       justify-content: center;
     }
@@ -275,10 +239,6 @@ import logoAndName from '../static/images/logo-and-name.svg'
 
     .profile__description-text {
       font-size: 1rem;
-    }
-
-    .profile__action {
-      width: 100%;
     }
   }
 </style>

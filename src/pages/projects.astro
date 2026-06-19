@@ -4,6 +4,7 @@ import ProjectItem, {
 } from '../components/ProjectItem.astro'
 import Layout from '../layouts/Layout.astro'
 import acecomLogo from '../static/images/acecom-logo.svg'
+import uniLogo from '../static/images/uni-logo-transparente-granate.png'
 import { tech } from '../utils'
 
 const projects: ProjectItemProps[] = [
@@ -35,7 +36,8 @@ const projects: ProjectItemProps[] = [
       tech.graphql,
       tech.mongo,
       tech.postgres
-    ]
+    ],
+    paddingTop: '1.25rem'
   },
   {
     title: 'TypeScript Project Generator',
@@ -57,7 +59,7 @@ const projects: ProjectItemProps[] = [
       }
     ],
     tech: [tech.typescript, tech.javascript, tech.node],
-    objectFit: 'contain'
+    paddingTop: '1.25rem'
   },
   {
     title: 'ACECOM',
@@ -87,24 +89,25 @@ const projects: ProjectItemProps[] = [
     ],
     objectFit: 'contain',
     boxSizing: 'border-box',
-    paddingTop: '12px'
+    paddingTop: '1.25rem'
   },
   {
     title: 'Thesis Project II',
     description:
       'Real Time Face Recognition and Communication using IoT protocols',
     role: 'Thesis project',
-    status: 'DNS setup in progress',
+    status: 'Live demo',
     highlights: [
       'Face recognition and real-time communication using IoT protocols.',
       'Combines web dashboards, MQTT, TensorFlow and Raspberry Pi devices.'
     ],
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/cc-planinfoextractor.appspot.com/o/uni_logo.png?alt=media',
+    image: uniLogo.src,
     url: 'https://thesis2.anthonylzq.dev',
     links: [
       {
-        label: 'Demo pending DNS'
+        href: 'https://thesis2.anthonylzq.dev',
+        label: 'Open demo',
+        variant: 'primary'
       }
     ],
     tech: [
@@ -142,7 +145,7 @@ const projects: ProjectItemProps[] = [
       }
     ],
     tech: [tech.typescript, tech.javascript, tech.node],
-    objectFit: 'contain'
+    paddingTop: '1.25rem'
   },
   {
     title: 'Sum Time',
@@ -186,15 +189,25 @@ const projects: ProjectItemProps[] = [
   title='Projects | AnthonyLzq'
   description='A selection of projects by Anthony Luzquiños, including TypeScript APIs, developer tooling, web applications and IoT experiments.'
 >
-  <h1>Projects</h1>
-  <p class='projects-intro'>
-    Selected work across backend frameworks, developer tooling, web products,
-    utilities and IoT experiments.
-  </p>
-  <section>{projects.map(project => <ProjectItem {...project} />)}</section>
+  <div class='projects-page'>
+    <h1>Projects</h1>
+    <p class='projects-intro'>
+      Selected work across backend frameworks, developer tooling, web products,
+      utilities and IoT experiments.
+    </p>
+    <section class='projects-grid'>
+      {projects.map(project => <ProjectItem {...project} />)}
+    </section>
+  </div>
 </Layout>
 
 <style>
+  .projects-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
   .projects-intro {
     color: #333;
     font-size: 1.2rem;
@@ -203,9 +216,10 @@ const projects: ProjectItemProps[] = [
     text-wrap: balance;
   }
 
-  section {
+  .projects-grid {
     display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 2.5rem;
+    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   }
 </style>
