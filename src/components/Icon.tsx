@@ -15,13 +15,18 @@ const Icon: FC<Props> = props => {
       href={href}
       target='_blank'
       rel='noreferrer'
-      style={{ textDecoration: 'none', color: '#000', cursor: 'pointer' }}
+      style={{
+        display: 'inline-flex',
+        textDecoration: 'none',
+        color: '#000',
+        cursor: 'pointer'
+      }}
     >
       <img
         src={image}
         alt={name}
         height={height}
-        style={{ margin: '0.5rem', borderRadius: '4px' }}
+        style={{ margin: '0.25rem', borderRadius: '4px' }}
       />
     </a>
   )

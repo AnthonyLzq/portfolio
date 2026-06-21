@@ -78,7 +78,7 @@ const actions = links ?? (url ? [{ href: url, label: 'Open project' }] : [])
         {status && <span>{status}</span>}
       </div>
     </div>
-    <div>
+    <div class='project-body'>
       <p>{description}</p>
       {
         highlights.length > 0 && (
@@ -132,11 +132,15 @@ const actions = links ?? (url ? [{ href: url, label: 'Open project' }] : [])
     border-radius: 20px;
     align-items: center;
     background-color: #fff;
+    height: 100%;
     overflow: hidden;
   }
 
   .container section {
     box-sizing: border-box;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     width: 100%;
     padding: 1.25rem;
   }
@@ -191,6 +195,12 @@ const actions = links ?? (url ? [{ href: url, label: 'Open project' }] : [])
     margin: 0;
   }
 
+  .project-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
   .project-meta {
     display: flex;
     flex-wrap: wrap;
@@ -216,7 +226,8 @@ const actions = links ?? (url ? [{ href: url, label: 'Open project' }] : [])
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
   }
 
   .project-action {
@@ -241,9 +252,18 @@ const actions = links ?? (url ? [{ href: url, label: 'Open project' }] : [])
 
   div#stack_container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     align-items: center;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+
+  @media (max-width: 480px) {
+    div#stack_container {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 
   @media (max-width: 400px) {

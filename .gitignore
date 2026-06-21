@@ -4,6 +4,9 @@ dist/
 # generated types
 .astro/
 
+# local debug artifacts
+debug/
+
 # dependencies
 node_modules/
 
