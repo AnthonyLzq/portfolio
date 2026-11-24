@@ -4,6 +4,7 @@ import ProjectItem, {
 } from '../components/ProjectItem.astro'
 import Layout from '../layouts/Layout.astro'
 import acecomLogo from '../static/images/acecom-logo.svg'
+import extendImagesLogo from '../static/images/extend-images-logo.png'
 import uniLogo from '../static/images/uni-logo-transparente-granate.png'
 import { tech } from '../utils'
 
@@ -181,6 +182,31 @@ const projects: ProjectItemProps[] = [
         href: 'https://cg.anthonylzq.dev',
         label: 'Open demo',
         variant: 'primary'
+      }
+    ],
+    tech: [tech.astro, tech.typescript, tech.react]
+  },
+  {
+    title: 'Extend Images',
+    description: "Extend an image's canvas with empty space.",
+    role: 'Utility app',
+    status: 'Live site',
+    highlights: [
+      'Extends an image canvas with empty space without resizing it or using AI.',
+      'Set a target size; smaller than the original returns an error. Astro for the static SEO page, React for the app.'
+    ],
+    image: extendImagesLogo.src,
+    url: 'https://ei.anthonylzq.dev',
+    links: [
+      {
+        href: 'https://ei.anthonylzq.dev',
+        label: 'Open site',
+        variant: 'primary'
+      },
+      {
+        href: 'https://github.com/AnthonyLzq/extend-images',
+        label: 'View source',
+        variant: 'secondary'
       }
     ],
     tech: [tech.astro, tech.typescript, tech.react]
